@@ -8,19 +8,53 @@
 
 /* Begin PBXBuildFile section */
 		4A437AAC2407EDC200659F02 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A437AAB2407EDC200659F02 /* AppDelegate.swift */; };
-		4A437AB02407EDC200659F02 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A437AAF2407EDC200659F02 /* ViewController.swift */; };
 		4A437AB52407EDC600659F02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A437AB42407EDC600659F02 /* Assets.xcassets */; };
 		4A437AB82407EDC600659F02 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A437AB62407EDC600659F02 /* LaunchScreen.storyboard */; };
 		4A437AC12407EF4F00659F02 /* LBTATools in Frameworks */ = {isa = PBXBuildFile; productRef = 4A437AC02407EF4F00659F02 /* LBTATools */; };
+		4A437AC42407FB3200659F02 /* MembersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A437AC32407FB3200659F02 /* MembersController.swift */; };
+		4A437ACB2408040400659F02 /* HSIAIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A437ACA2408040400659F02 /* HSIAIcon.swift */; };
+		4A437ACE240804D700659F02 /* HSIAColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A437ACD240804D700659F02 /* HSIAColor.swift */; };
+		4A437AD0240804E200659F02 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A437ACF240804E200659F02 /* StringExtension.swift */; };
+		4ABC7AA824080B0F00972675 /* HSIALabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7AA724080B0F00972675 /* HSIALabel.swift */; };
+		4ABC7AAA24080C9400972675 /* AttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7AA924080C9400972675 /* AttributedString.swift */; };
+		4ABC7AAC24080D3D00972675 /* HSIAImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7AAB24080D3D00972675 /* HSIAImageView.swift */; };
+		4ABC7AAE24080EB500972675 /* LBTAToolsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7AAD24080EB500972675 /* LBTAToolsExtension.swift */; };
+		4ABC7AB02408123F00972675 /* HSIAButtonRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7AAF2408123F00972675 /* HSIAButtonRectangle.swift */; };
+		4ABC7AB22408124700972675 /* HSIAButtonCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7AB12408124700972675 /* HSIAButtonCircle.swift */; };
+		4ABC7AB42408125600972675 /* HSIATextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7AB32408125600972675 /* HSIATextField.swift */; };
+		4ABC7AB62408127600972675 /* HSIATableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7AB52408127600972675 /* HSIATableViewHeader.swift */; };
+		4ABC7AB82408128500972675 /* HSIATableViewRowMedium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7AB72408128500972675 /* HSIATableViewRowMedium.swift */; };
+		4ABC7ABA2408128F00972675 /* HSIATableViewRowLarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7AB92408128F00972675 /* HSIATableViewRowLarge.swift */; };
+		4ABC7ABC2408129700972675 /* HSIATableViewRowImageSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7ABB2408129700972675 /* HSIATableViewRowImageSelect.swift */; };
+		4ABC7ABE2408211B00972675 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7ABD2408211B00972675 /* CustomTextField.swift */; };
+		4ABC7AC0240822E400972675 /* Sizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7ABF240822E400972675 /* Sizing.swift */; };
+		4ABC7AC22408764B00972675 /* HSIALayerTableViewAndTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7AC12408764B00972675 /* HSIALayerTableViewAndTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4A437AA82407EDC200659F02 /* HSIA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HSIA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A437AAB2407EDC200659F02 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4A437AAF2407EDC200659F02 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4A437AB42407EDC600659F02 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A437AB72407EDC600659F02 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A437AB92407EDC600659F02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A437AC32407FB3200659F02 /* MembersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersController.swift; sourceTree = "<group>"; };
+		4A437ACA2408040400659F02 /* HSIAIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSIAIcon.swift; sourceTree = "<group>"; };
+		4A437ACD240804D700659F02 /* HSIAColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSIAColor.swift; sourceTree = "<group>"; };
+		4A437ACF240804E200659F02 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		4ABC7AA724080B0F00972675 /* HSIALabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSIALabel.swift; sourceTree = "<group>"; };
+		4ABC7AA924080C9400972675 /* AttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedString.swift; sourceTree = "<group>"; };
+		4ABC7AAB24080D3D00972675 /* HSIAImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSIAImageView.swift; sourceTree = "<group>"; };
+		4ABC7AAD24080EB500972675 /* LBTAToolsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBTAToolsExtension.swift; sourceTree = "<group>"; };
+		4ABC7AAF2408123F00972675 /* HSIAButtonRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSIAButtonRectangle.swift; sourceTree = "<group>"; };
+		4ABC7AB12408124700972675 /* HSIAButtonCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSIAButtonCircle.swift; sourceTree = "<group>"; };
+		4ABC7AB32408125600972675 /* HSIATextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSIATextField.swift; sourceTree = "<group>"; };
+		4ABC7AB52408127600972675 /* HSIATableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSIATableViewHeader.swift; sourceTree = "<group>"; };
+		4ABC7AB72408128500972675 /* HSIATableViewRowMedium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSIATableViewRowMedium.swift; sourceTree = "<group>"; };
+		4ABC7AB92408128F00972675 /* HSIATableViewRowLarge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSIATableViewRowLarge.swift; sourceTree = "<group>"; };
+		4ABC7ABB2408129700972675 /* HSIATableViewRowImageSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSIATableViewRowImageSelect.swift; sourceTree = "<group>"; };
+		4ABC7ABD2408211B00972675 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		4ABC7ABF240822E400972675 /* Sizing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizing.swift; sourceTree = "<group>"; };
+		4ABC7AC12408764B00972675 /* HSIALayerTableViewAndTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSIALayerTableViewAndTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,12 +89,61 @@
 			isa = PBXGroup;
 			children = (
 				4A437AAB2407EDC200659F02 /* AppDelegate.swift */,
-				4A437AAF2407EDC200659F02 /* ViewController.swift */,
+				4A437AC82408037D00659F02 /* Models */,
+				4A437AC92408038200659F02 /* Views */,
+				4A437AC72408037400659F02 /* Controlllers */,
+				4A437ACC2408044E00659F02 /* Helpers */,
 				4A437AB42407EDC600659F02 /* Assets.xcassets */,
 				4A437AB62407EDC600659F02 /* LaunchScreen.storyboard */,
 				4A437AB92407EDC600659F02 /* Info.plist */,
 			);
 			path = HSIA;
+			sourceTree = "<group>";
+		};
+		4A437AC72408037400659F02 /* Controlllers */ = {
+			isa = PBXGroup;
+			children = (
+				4A437AC32407FB3200659F02 /* MembersController.swift */,
+			);
+			path = Controlllers;
+			sourceTree = "<group>";
+		};
+		4A437AC82408037D00659F02 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4A437AC92408038200659F02 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4ABC7AA724080B0F00972675 /* HSIALabel.swift */,
+				4A437ACA2408040400659F02 /* HSIAIcon.swift */,
+				4ABC7AAB24080D3D00972675 /* HSIAImageView.swift */,
+				4ABC7AAF2408123F00972675 /* HSIAButtonRectangle.swift */,
+				4ABC7AB12408124700972675 /* HSIAButtonCircle.swift */,
+				4ABC7ABD2408211B00972675 /* CustomTextField.swift */,
+				4ABC7AB32408125600972675 /* HSIATextField.swift */,
+				4ABC7AB52408127600972675 /* HSIATableViewHeader.swift */,
+				4ABC7AB72408128500972675 /* HSIATableViewRowMedium.swift */,
+				4ABC7AB92408128F00972675 /* HSIATableViewRowLarge.swift */,
+				4ABC7ABB2408129700972675 /* HSIATableViewRowImageSelect.swift */,
+				4ABC7AC12408764B00972675 /* HSIALayerTableViewAndTextField.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4A437ACC2408044E00659F02 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				4A437ACD240804D700659F02 /* HSIAColor.swift */,
+				4A437ACF240804E200659F02 /* StringExtension.swift */,
+				4ABC7AA924080C9400972675 /* AttributedString.swift */,
+				4ABC7AAD24080EB500972675 /* LBTAToolsExtension.swift */,
+				4ABC7ABF240822E400972675 /* Sizing.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,8 +222,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A437AB02407EDC200659F02 /* ViewController.swift in Sources */,
+				4ABC7AAA24080C9400972675 /* AttributedString.swift in Sources */,
+				4ABC7ABA2408128F00972675 /* HSIATableViewRowLarge.swift in Sources */,
+				4ABC7AAC24080D3D00972675 /* HSIAImageView.swift in Sources */,
+				4A437AC42407FB3200659F02 /* MembersController.swift in Sources */,
+				4ABC7AB22408124700972675 /* HSIAButtonCircle.swift in Sources */,
+				4ABC7AB82408128500972675 /* HSIATableViewRowMedium.swift in Sources */,
+				4ABC7ABC2408129700972675 /* HSIATableViewRowImageSelect.swift in Sources */,
+				4ABC7AAE24080EB500972675 /* LBTAToolsExtension.swift in Sources */,
+				4ABC7ABE2408211B00972675 /* CustomTextField.swift in Sources */,
+				4ABC7AA824080B0F00972675 /* HSIALabel.swift in Sources */,
+				4ABC7AB42408125600972675 /* HSIATextField.swift in Sources */,
+				4ABC7AC22408764B00972675 /* HSIALayerTableViewAndTextField.swift in Sources */,
+				4ABC7AC0240822E400972675 /* Sizing.swift in Sources */,
+				4A437AD0240804E200659F02 /* StringExtension.swift in Sources */,
+				4A437ACE240804D700659F02 /* HSIAColor.swift in Sources */,
 				4A437AAC2407EDC200659F02 /* AppDelegate.swift in Sources */,
+				4ABC7AB62408127600972675 /* HSIATableViewHeader.swift in Sources */,
+				4A437ACB2408040400659F02 /* HSIAIcon.swift in Sources */,
+				4ABC7AB02408123F00972675 /* HSIAButtonRectangle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
