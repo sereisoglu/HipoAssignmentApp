@@ -10,14 +10,12 @@ import UIKit
 
 class CustomTextField: UITextField {
     
-    fileprivate var padding: UIEdgeInsets!
+    fileprivate let padding: UIEdgeInsets = .init(top: 11, left: 16 + 22 + 10, bottom: 11, right: 16)
     
     init() {
         super.init(frame: CGRect.zero)
         
         self.defaultTextAttributes = AttributedString.generate(type: .body1, weight: .medium, color: HSIAColor.labelPrimary.color)
-        
-        self.padding = .init(top: 11, left: 16 + 22 + 10, bottom: 11, right: 16 + 22 + 10)
         
         self.withSize(Sizing.tableViewAndTextFieldSize)
     }

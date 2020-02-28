@@ -26,14 +26,16 @@ class HSIATextField: UIView, UITextFieldDelegate {
         
         icon = HSIAIcon(size: .pt22, icon: nil, tintColor: .labelPrimary)
         
-        leftView.hstack(
-            icon, alignment: .center
-        ).padLeft(Sizing.paddingTableViewAndTextField.left)
-        
+        leftView.stack(
+            icon, alignment: .trailing
+        )
+        // for ios11
+        leftView.withSize(.init(width: Sizing.paddingTableViewAndTextField.left + 22, height: 22))
         // Text Field
         
         textField = CustomTextField()
         textField.delegate = self
+        
         background = HSIALayerTableViewAndTextField()
         
         textField.leftView = leftView

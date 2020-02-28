@@ -8,14 +8,19 @@
 
 import UIKit
 
-class MembersCell: UICollectionViewCell {
+class MembersHeader: UICollectionReusableView {
+    
+    fileprivate var tableViewHeader: HSIATableViewHeader!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        let cell = HSIATableViewRowLarge()
-        cell.setData(image: nil, text: "Saffet Emin Reisoglu", subText: "@sereisoglu")
-        cell.addFillSuperview(superview: self)
+        tableViewHeader = HSIATableViewHeader()
+        tableViewHeader.addFillSuperview(superview: self)
+    }
+    
+    func setData(headerText: String) {
+        tableViewHeader.setData(headerText: headerText)
     }
     
     required init?(coder: NSCoder) {
@@ -24,22 +29,53 @@ class MembersCell: UICollectionViewCell {
     
 }
 
-class MembersController: UICollectionViewController {
+class MembersCell: UICollectionViewCell {
     
+    fileprivate var tableViewCell: HSIATableViewRowLarge!
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        tableViewCell = HSIATableViewRowLarge()
+        tableViewCell.addFillSuperview(superview: self)
+    }
+    
+    func setData(image: UIImage?, text: String, subText: String) {
+        tableViewCell.setData(image: image, text: text, subText: subText)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
+class MembersController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    
+    var mainController: UIViewController?
+    
+    fileprivate let headerId = "headerId"
     fileprivate let cellId = "cellId"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.collectionView.backgroundColor = .white
+        self.collectionView.backgroundColor = HSIAColor.backgroundPrimary.color
         
+        self.collectionView.register(MembersHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
         self.collectionView.register(MembersCell.self, forCellWithReuseIdentifier: cellId)
         
         self.collectionView.contentInset = .init(top: 16, left: 0, bottom: 166, right: 0)
-        
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        
-        self.navigationItem.title = "Hipo Members"
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! MembersHeader
+        header.setData(headerText: "iOS Team")
+        return header
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return .init(width: self.view.frame.width, height: 42)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -47,13 +83,14 @@ class MembersController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MembersCell
+        cell.setData(image: nil, text: "Saffet Emin Reisoglu", subText: "@sereisoglu")
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailController = DetailController()
-        self.navigationController?.pushViewController(detailController, animated: true)
+        mainController?.navigationController?.pushViewController(detailController, animated: true)
     }
     
     init() {
@@ -61,6 +98,7 @@ class MembersController: UICollectionViewController {
         layout.itemSize = .init(width: Sizing.oneColumn, height: 64)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 12
+//        layout.headerReferenceSize = .init(width: Sizing.deviceSize.width, height: 100)
         super.init(collectionViewLayout: layout)
     }
     

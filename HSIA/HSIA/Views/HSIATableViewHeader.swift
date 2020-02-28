@@ -13,16 +13,20 @@ class HSIATableViewHeader: UIView {
     
     fileprivate var label: HSIALabel!
     
-    init(text: String) {
+    init() {
         super.init(frame: .zero)
         
         let labelWidth = Sizing.oneColumn - (Sizing.paddingTableViewAndTextField.left + Sizing.paddingTableViewAndTextField.right)
         
-        label = HSIALabel(text: text.uppercased(), type: .body2, weight: .semibold, color: .labelPrimary)
+        label = HSIALabel(text: nil, type: .body2, weight: .semibold, color: .labelPrimary)
         
         stack(
             label.withWidth(labelWidth), alignment: .center
         ).withMargins(Sizing.paddingTableViewAndTextField)
+    }
+    
+    func setData(headerText: String) {
+        label.setData(text: headerText)
     }
     
     required init?(coder: NSCoder) {

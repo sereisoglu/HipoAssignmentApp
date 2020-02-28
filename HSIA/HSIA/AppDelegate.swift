@@ -18,9 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.makeKeyAndVisible()
         
-//        window?.rootViewController = UINavigationController(rootViewController: MembersController())
-//        window?.rootViewController = MainController()
-        window?.rootViewController = UINavigationController(rootViewController: DetailController())
+        window?.rootViewController = UINavigationController(rootViewController: MainController())
+//        window?.rootViewController = UINavigationController(rootViewController: DetailController())
         
         return true
     }

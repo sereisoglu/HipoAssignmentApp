@@ -12,6 +12,22 @@ struct Sizing {
     
     static let deviceSize: CGSize = UIScreen.main.bounds.size
     
+    static let twoButtonsLayerHeight: CGFloat = {
+        let statusBarHeight = UIApplication.shared.statusBarFrame.size.height
+        if statusBarHeight == 44 {
+            return 16 + 50 + 16 + 50 + 34
+        }
+        return 16 + 50 + 16 + 50 + 16
+    }()
+    
+    static let oneButtonLayerHeight: CGFloat = {
+        let statusBarHeight = UIApplication.shared.statusBarFrame.size.height
+        if statusBarHeight == 44 {
+            return 16 + 50 + 34
+        }
+        return 16 + 50 + 16
+    }()
+    
     static let space11pt: CGFloat = 11
     static let space16pt: CGFloat = 16
     static let space20pt: CGFloat = 20
