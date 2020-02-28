@@ -13,17 +13,21 @@ class HSIATableViewRowImageSelect: UIView {
 
     fileprivate var button: HSIAButtonCircle!
     fileprivate var imageView: HSIAImageView!
+    fileprivate var background: HSIALayerTableViewAndTextField!
 
     init() {
         super.init(frame: .zero)
 
-        self.backgroundColor = .blue
-
         button = HSIAButtonCircle(iconName: .camera)
         imageView = HSIAImageView(size: .pt100)
+        background = HSIALayerTableViewAndTextField()
+        
+        self.withWidth(Sizing.oneColumn)
+        
+        background.addFillSuperview(superview: self)
 
         stack(
-            imageView
+            imageView, alignment: .center
         ).withMargins(Sizing.paddingTableViewAndTextField)
         
         button.addCenterInSuperview(superview: self)

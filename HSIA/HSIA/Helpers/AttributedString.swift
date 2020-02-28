@@ -50,12 +50,10 @@ struct AttributedString {
         paragraphStyle.alignment = alignment
         paragraphStyle.lineBreakMode = .byTruncatingTail
         
-        print(type.value.kerning)
-        
         var attrs: [NSAttributedString.Key : Any] = [
             .font: UIFont.systemFont(ofSize: type.value.size, weight: weight.value),
             .paragraphStyle: paragraphStyle,
-            .kern: 1.0,
+            .kern: type.value.kerning,
             .baselineOffset: 0.5
         ]
         

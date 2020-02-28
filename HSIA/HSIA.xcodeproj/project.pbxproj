@@ -29,6 +29,11 @@
 		4ABC7ABE2408211B00972675 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7ABD2408211B00972675 /* CustomTextField.swift */; };
 		4ABC7AC0240822E400972675 /* Sizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7ABF240822E400972675 /* Sizing.swift */; };
 		4ABC7AC22408764B00972675 /* HSIALayerTableViewAndTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7AC12408764B00972675 /* HSIALayerTableViewAndTextField.swift */; };
+		4ABC7AC4240889FD00972675 /* HSIALayerButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7AC3240889FD00972675 /* HSIALayerButtons.swift */; };
+		4ABC7AC624088D6300972675 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7AC524088D6300972675 /* MainController.swift */; };
+		4ABC7AC824088EAD00972675 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7AC724088EAD00972675 /* DetailController.swift */; };
+		4ACFB91624098BBA00092CFC /* HipoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACFB91524098BBA00092CFC /* HipoModel.swift */; };
+		4ACFB91824098C2E00092CFC /* hipo.json in Resources */ = {isa = PBXBuildFile; fileRef = 4ACFB91724098C2E00092CFC /* hipo.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +60,11 @@
 		4ABC7ABD2408211B00972675 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		4ABC7ABF240822E400972675 /* Sizing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizing.swift; sourceTree = "<group>"; };
 		4ABC7AC12408764B00972675 /* HSIALayerTableViewAndTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSIALayerTableViewAndTextField.swift; sourceTree = "<group>"; };
+		4ABC7AC3240889FD00972675 /* HSIALayerButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSIALayerButtons.swift; sourceTree = "<group>"; };
+		4ABC7AC524088D6300972675 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		4ABC7AC724088EAD00972675 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
+		4ACFB91524098BBA00092CFC /* HipoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HipoModel.swift; sourceTree = "<group>"; };
+		4ACFB91724098C2E00092CFC /* hipo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hipo.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +98,7 @@
 		4A437AAA2407EDC200659F02 /* HSIA */ = {
 			isa = PBXGroup;
 			children = (
+				4ACFB91724098C2E00092CFC /* hipo.json */,
 				4A437AAB2407EDC200659F02 /* AppDelegate.swift */,
 				4A437AC82408037D00659F02 /* Models */,
 				4A437AC92408038200659F02 /* Views */,
@@ -103,7 +114,9 @@
 		4A437AC72408037400659F02 /* Controlllers */ = {
 			isa = PBXGroup;
 			children = (
+				4ABC7AC524088D6300972675 /* MainController.swift */,
 				4A437AC32407FB3200659F02 /* MembersController.swift */,
+				4ABC7AC724088EAD00972675 /* DetailController.swift */,
 			);
 			path = Controlllers;
 			sourceTree = "<group>";
@@ -111,6 +124,7 @@
 		4A437AC82408037D00659F02 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4ACFB91524098BBA00092CFC /* HipoModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -130,6 +144,7 @@
 				4ABC7AB92408128F00972675 /* HSIATableViewRowLarge.swift */,
 				4ABC7ABB2408129700972675 /* HSIATableViewRowImageSelect.swift */,
 				4ABC7AC12408764B00972675 /* HSIALayerTableViewAndTextField.swift */,
+				4ABC7AC3240889FD00972675 /* HSIALayerButtons.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -211,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A437AB82407EDC600659F02 /* LaunchScreen.storyboard in Resources */,
+				4ACFB91824098C2E00092CFC /* hipo.json in Resources */,
 				4A437AB52407EDC600659F02 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -223,6 +239,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4ABC7AAA24080C9400972675 /* AttributedString.swift in Sources */,
+				4ABC7AC624088D6300972675 /* MainController.swift in Sources */,
+				4ABC7AC824088EAD00972675 /* DetailController.swift in Sources */,
 				4ABC7ABA2408128F00972675 /* HSIATableViewRowLarge.swift in Sources */,
 				4ABC7AAC24080D3D00972675 /* HSIAImageView.swift in Sources */,
 				4A437AC42407FB3200659F02 /* MembersController.swift in Sources */,
@@ -232,9 +250,11 @@
 				4ABC7AAE24080EB500972675 /* LBTAToolsExtension.swift in Sources */,
 				4ABC7ABE2408211B00972675 /* CustomTextField.swift in Sources */,
 				4ABC7AA824080B0F00972675 /* HSIALabel.swift in Sources */,
+				4ABC7AC4240889FD00972675 /* HSIALayerButtons.swift in Sources */,
 				4ABC7AB42408125600972675 /* HSIATextField.swift in Sources */,
 				4ABC7AC22408764B00972675 /* HSIALayerTableViewAndTextField.swift in Sources */,
 				4ABC7AC0240822E400972675 /* Sizing.swift in Sources */,
+				4ACFB91624098BBA00092CFC /* HipoModel.swift in Sources */,
 				4A437AD0240804E200659F02 /* StringExtension.swift in Sources */,
 				4A437ACE240804D700659F02 /* HSIAColor.swift in Sources */,
 				4A437AAC2407EDC200659F02 /* AppDelegate.swift in Sources */,

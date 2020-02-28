@@ -16,6 +16,7 @@ enum HSIAIconName: String {
     case github
     case map
     case name
+    case person
     case team
 }
 

@@ -19,7 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
 //        window?.rootViewController = UINavigationController(rootViewController: MembersController())
-        window?.rootViewController = MainController()
+//        window?.rootViewController = MainController()
+        window?.rootViewController = UINavigationController(rootViewController: DetailController())
         
         return true
     }

@@ -11,18 +11,20 @@ import LBTATools
 
 class HSIATextField: UIView, UITextFieldDelegate {
     
+    fileprivate var isJustNumber: Bool = false
+    
     fileprivate var icon: HSIAIcon!
-    
     fileprivate var textField: CustomTextField!
+    fileprivate var background: HSIALayerTableViewAndTextField!
     
-    init(iconName: HSIAIconName, text: String?, placeholder: String) {
+    init() {
         super.init(frame: .zero)
         
         // Left View
         
         let leftView = UIView()
         
-        icon = HSIAIcon(size: .pt22, icon: iconName, tintColor: .labelPrimary)
+        icon = HSIAIcon(size: .pt22, icon: nil, tintColor: .labelPrimary)
         
         leftView.hstack(
             icon, alignment: .center
@@ -30,14 +32,37 @@ class HSIATextField: UIView, UITextFieldDelegate {
         
         // Text Field
         
-        textField = CustomTextField(text: text, placeholder: placeholder)
+        textField = CustomTextField()
+        textField.delegate = self
+        background = HSIALayerTableViewAndTextField()
         
         textField.leftView = leftView
         textField.leftViewMode = .always
         
         textField.autocorrectionType = .no
         
+        background.addFillSuperview(superview: self)
         textField.addFillSuperview(superview: self)
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if isJustNumber {
+            let allowedCharacters = CharacterSet.decimalDigits
+            let characterSet = CharacterSet(charactersIn: string)
+            return allowedCharacters.isSuperset(of: characterSet)
+        } else {
+            return true
+        }
+    }
+    
+    func setData(iconName: HSIAIconName, text: String?, placeholder: String?, isJustNumber: Bool) {
+        icon.setData(icon: iconName)
+        if isJustNumber {
+            self.isJustNumber = isJustNumber
+            textField.setData(text: text, placeholder: placeholder, keyboardType: .numberPad)
+        } else {
+            textField.setData(text: text, placeholder: placeholder)
+        }
     }
     
     required init?(coder: NSCoder) {

@@ -15,18 +15,20 @@ class HSIATableViewRowLarge: UIView {
     fileprivate var label: HSIALabel!
     fileprivate var sublabel: HSIALabel!
     fileprivate var icon: HSIAIcon!
+    fileprivate var background: HSIALayerTableViewAndTextField!
     
     init() {
         super.init(frame: .zero)
-        
-        self.backgroundColor = .blue
         
         imageView = HSIAImageView(size: .pt42)
         label = HSIALabel(text: nil, type: .body1, weight: .medium, color: .labelPrimary)
         sublabel = HSIALabel(text: nil, type: .body2, weight: .medium, color: .labelSecondary)
         icon = HSIAIcon(size: .pt22, icon: .chevronRight, tintColor: .labelPrimary)
+        background = HSIALayerTableViewAndTextField()
         
         let labelWidth = Sizing.oneColumn - (Sizing.paddingTableViewAndTextField.left + 42 + 10 + 10 + 22 + Sizing.paddingTableViewAndTextField.right)
+        
+        background.addFillSuperview(superview: self)
         
         hstack(
             imageView,
