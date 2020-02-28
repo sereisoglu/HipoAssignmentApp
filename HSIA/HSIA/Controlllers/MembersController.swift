@@ -8,48 +8,6 @@
 
 import UIKit
 
-class MembersHeader: UICollectionReusableView {
-    
-    fileprivate var tableViewHeader: HSIATableViewHeader!
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        tableViewHeader = HSIATableViewHeader()
-        tableViewHeader.addFillSuperview(superview: self)
-    }
-    
-    func setData(headerText: String) {
-        tableViewHeader.setData(headerText: headerText)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-}
-
-class MembersCell: UICollectionViewCell {
-    
-    fileprivate var tableViewCell: HSIATableViewRowLarge!
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        tableViewCell = HSIATableViewRowLarge()
-        tableViewCell.addFillSuperview(superview: self)
-    }
-    
-    func setData(image: UIImage?, text: String, subText: String) {
-        tableViewCell.setData(image: image, text: text, subText: subText)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-}
-
 class MembersController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var mainController: UIViewController?

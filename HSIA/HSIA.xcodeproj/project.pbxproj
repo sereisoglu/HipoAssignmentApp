@@ -36,6 +36,11 @@
 		4ACFB91824098C2E00092CFC /* hipo.json in Resources */ = {isa = PBXBuildFile; fileRef = 4ACFB91724098C2E00092CFC /* hipo.json */; };
 		4ACFB91A2409953A00092CFC /* CustomAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACFB9192409953A00092CFC /* CustomAlertController.swift */; };
 		4ACFB91C2409B51200092CFC /* MemberDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACFB91B2409B51200092CFC /* MemberDetailController.swift */; };
+		4ACFB9202409B8FB00092CFC /* MembersHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACFB91F2409B8FB00092CFC /* MembersHeader.swift */; };
+		4ACFB9222409B90300092CFC /* MembersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACFB9212409B90300092CFC /* MembersCell.swift */; };
+		4ACFB9242409B91100092CFC /* MemberDetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACFB9232409B91100092CFC /* MemberDetailHeader.swift */; };
+		4ACFB9262409B91800092CFC /* MemberDetailTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACFB9252409B91800092CFC /* MemberDetailTextFieldCell.swift */; };
+		4ACFB9282409B91E00092CFC /* MemberDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACFB9272409B91E00092CFC /* MemberDetailTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +74,11 @@
 		4ACFB91724098C2E00092CFC /* hipo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hipo.json; sourceTree = "<group>"; };
 		4ACFB9192409953A00092CFC /* CustomAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertController.swift; sourceTree = "<group>"; };
 		4ACFB91B2409B51200092CFC /* MemberDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailController.swift; sourceTree = "<group>"; };
+		4ACFB91F2409B8FB00092CFC /* MembersHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersHeader.swift; sourceTree = "<group>"; };
+		4ACFB9212409B90300092CFC /* MembersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersCell.swift; sourceTree = "<group>"; };
+		4ACFB9232409B91100092CFC /* MemberDetailHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailHeader.swift; sourceTree = "<group>"; };
+		4ACFB9252409B91800092CFC /* MemberDetailTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailTextFieldCell.swift; sourceTree = "<group>"; };
+		4ACFB9272409B91E00092CFC /* MemberDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +147,28 @@
 		4A437AC92408038200659F02 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4ACFB91E2409B8EB00092CFC /* Cells */,
+				4ACFB91D2409B8CE00092CFC /* Components */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4A437ACC2408044E00659F02 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				4ACFB9192409953A00092CFC /* CustomAlertController.swift */,
+				4A437ACD240804D700659F02 /* HSIAColor.swift */,
+				4A437ACF240804E200659F02 /* StringExtension.swift */,
+				4ABC7AA924080C9400972675 /* AttributedString.swift */,
+				4ABC7AAD24080EB500972675 /* LBTAToolsExtension.swift */,
+				4ABC7ABF240822E400972675 /* Sizing.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		4ACFB91D2409B8CE00092CFC /* Components */ = {
+			isa = PBXGroup;
+			children = (
 				4ABC7AA724080B0F00972675 /* HSIALabel.swift */,
 				4A437ACA2408040400659F02 /* HSIAIcon.swift */,
 				4ABC7AAB24080D3D00972675 /* HSIAImageView.swift */,
@@ -150,21 +182,20 @@
 				4ABC7ABB2408129700972675 /* HSIATableViewRowImageSelect.swift */,
 				4ABC7AC12408764B00972675 /* HSIALayerTableViewAndTextField.swift */,
 				4ABC7AC3240889FD00972675 /* HSIALayerButtons.swift */,
-				4ACFB9192409953A00092CFC /* CustomAlertController.swift */,
 			);
-			path = Views;
+			path = Components;
 			sourceTree = "<group>";
 		};
-		4A437ACC2408044E00659F02 /* Helpers */ = {
+		4ACFB91E2409B8EB00092CFC /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				4A437ACD240804D700659F02 /* HSIAColor.swift */,
-				4A437ACF240804E200659F02 /* StringExtension.swift */,
-				4ABC7AA924080C9400972675 /* AttributedString.swift */,
-				4ABC7AAD24080EB500972675 /* LBTAToolsExtension.swift */,
-				4ABC7ABF240822E400972675 /* Sizing.swift */,
+				4ACFB91F2409B8FB00092CFC /* MembersHeader.swift */,
+				4ACFB9212409B90300092CFC /* MembersCell.swift */,
+				4ACFB9232409B91100092CFC /* MemberDetailHeader.swift */,
+				4ACFB9272409B91E00092CFC /* MemberDetailTableViewCell.swift */,
+				4ACFB9252409B91800092CFC /* MemberDetailTextFieldCell.swift */,
 			);
-			path = Helpers;
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,6 +275,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4ACFB9202409B8FB00092CFC /* MembersHeader.swift in Sources */,
 				4ABC7AAA24080C9400972675 /* AttributedString.swift in Sources */,
 				4ACFB91C2409B51200092CFC /* MemberDetailController.swift in Sources */,
 				4ABC7AC624088D6300972675 /* MainController.swift in Sources */,
@@ -258,17 +290,21 @@
 				4ABC7ABE2408211B00972675 /* CustomTextField.swift in Sources */,
 				4ABC7AA824080B0F00972675 /* HSIALabel.swift in Sources */,
 				4ABC7AC4240889FD00972675 /* HSIALayerButtons.swift in Sources */,
+				4ACFB9262409B91800092CFC /* MemberDetailTextFieldCell.swift in Sources */,
 				4ABC7AB42408125600972675 /* HSIATextField.swift in Sources */,
 				4ABC7AC22408764B00972675 /* HSIALayerTableViewAndTextField.swift in Sources */,
 				4ABC7AC0240822E400972675 /* Sizing.swift in Sources */,
 				4ACFB91624098BBA00092CFC /* HipoModel.swift in Sources */,
+				4ACFB9222409B90300092CFC /* MembersCell.swift in Sources */,
 				4A437AD0240804E200659F02 /* StringExtension.swift in Sources */,
+				4ACFB9282409B91E00092CFC /* MemberDetailTableViewCell.swift in Sources */,
 				4A437ACE240804D700659F02 /* HSIAColor.swift in Sources */,
 				4A437AAC2407EDC200659F02 /* AppDelegate.swift in Sources */,
 				4ABC7AB62408127600972675 /* HSIATableViewHeader.swift in Sources */,
 				4ACFB91A2409953A00092CFC /* CustomAlertController.swift in Sources */,
 				4A437ACB2408040400659F02 /* HSIAIcon.swift in Sources */,
 				4ABC7AB02408123F00972675 /* HSIAButtonRectangle.swift in Sources */,
+				4ACFB9242409B91100092CFC /* MemberDetailHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

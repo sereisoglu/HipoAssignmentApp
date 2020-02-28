@@ -8,69 +8,6 @@
 
 import UIKit
 
-class MemberDetailHeader: UICollectionReusableView {
-    
-    fileprivate var tableViewCell: HSIATableViewRowImageSelect!
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        tableViewCell = HSIATableViewRowImageSelect()
-        tableViewCell.addCenterInSuperview(superview: self)
-    }
-    
-    func setData(image: UIImage?, text: String) {
-        tableViewCell.setData(image: image, text: text)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-}
-
-class MemberDetailTextFieldCell: UICollectionViewCell {
-    
-    fileprivate var textField: HSIATextField!
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        textField = HSIATextField()
-        textField.addFillSuperview(superview: self)
-    }
-    
-    func setData(iconName: HSIAIconName, text: String?, placeholder: String, isJustNumber: Bool) {
-        textField.setData(iconName: iconName, text: text, placeholder: placeholder, isJustNumber: isJustNumber)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-}
-
-class MemberDetailTableViewCell: UICollectionViewCell {
-    
-    fileprivate var tableViewCell: HSIATableViewRowMedium!
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        tableViewCell = HSIATableViewRowMedium()
-        tableViewCell.addFillSuperview(superview: self)
-    }
-    
-    func setData(iconName: HSIAIconName, text: String) {
-        tableViewCell.setData(leftIconName: iconName, text: text)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-}
-
 class MemberDetailController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     fileprivate let headerId = "headerId"
