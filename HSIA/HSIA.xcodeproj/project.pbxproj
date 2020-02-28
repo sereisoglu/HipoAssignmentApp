@@ -41,6 +41,7 @@
 		4ACFB9242409B91100092CFC /* MemberDetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACFB9232409B91100092CFC /* MemberDetailHeader.swift */; };
 		4ACFB9262409B91800092CFC /* MemberDetailTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACFB9252409B91800092CFC /* MemberDetailTextFieldCell.swift */; };
 		4ACFB9282409B91E00092CFC /* MemberDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACFB9272409B91E00092CFC /* MemberDetailTableViewCell.swift */; };
+		4ACFB92A2409DCA700092CFC /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACFB9292409DCA700092CFC /* IntExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +80,7 @@
 		4ACFB9232409B91100092CFC /* MemberDetailHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailHeader.swift; sourceTree = "<group>"; };
 		4ACFB9252409B91800092CFC /* MemberDetailTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailTextFieldCell.swift; sourceTree = "<group>"; };
 		4ACFB9272409B91E00092CFC /* MemberDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailTableViewCell.swift; sourceTree = "<group>"; };
+		4ACFB9292409DCA700092CFC /* IntExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 				4ABC7AA924080C9400972675 /* AttributedString.swift */,
 				4ABC7AAD24080EB500972675 /* LBTAToolsExtension.swift */,
 				4ABC7ABF240822E400972675 /* Sizing.swift */,
+				4ACFB9292409DCA700092CFC /* IntExtension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 				4ACFB91C2409B51200092CFC /* MemberDetailController.swift in Sources */,
 				4ABC7AC624088D6300972675 /* MainController.swift in Sources */,
 				4ABC7AC824088EAD00972675 /* DetailController.swift in Sources */,
+				4ACFB92A2409DCA700092CFC /* IntExtension.swift in Sources */,
 				4ABC7ABA2408128F00972675 /* HSIATableViewRowLarge.swift in Sources */,
 				4ABC7AAC24080D3D00972675 /* HSIAImageView.swift in Sources */,
 				4A437AC42407FB3200659F02 /* MembersController.swift in Sources */,

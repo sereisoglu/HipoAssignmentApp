@@ -15,6 +15,7 @@ enum HSIAColor {
     case labelWhite
     case buttonPrimary
     case buttonSecondary
+    case buttonTertiary
     case backgroundPrimary
     case backgroundSecondary
     case groupedBackground
@@ -24,7 +25,7 @@ enum HSIAColor {
     var color: UIColor {
         switch self {
         case .brand:
-            return .init(red: 227/255, green: 28/255, blue: 55/255, alpha: 1)
+            return .init(red: 227.0 / 255.0, green: 28.0 / 255.0, blue: 55.0 / 255.0, alpha: 1)
         case .labelPrimary:
             return .init(white: 0.0, alpha: 1)
         case .labelSecondary:
@@ -32,19 +33,21 @@ enum HSIAColor {
         case .labelWhite:
             return .white
         case .buttonPrimary:
-            return .init(red: 43/255, green: 49/255, blue: 55/255, alpha: 1)
+            return .init(red: 43.0 / 255.0, green: 49.0 / 255.0, blue: 55.0 / 255.0, alpha: 1)
         case .buttonSecondary:
-            return .init(red: 45/255, green: 186/255, blue: 78/255, alpha: 1)
+            return .init(red: 45.0 / 255.0, green: 186.0 / 255.0, blue: 78.0 / 255.0, alpha: 1)
+        case .buttonTertiary:
+            return UIColor(red: 255.0 / 255.0, green: 59.0 / 255.0, blue: 48.0 / 255.0, alpha: 1.0)
         case .backgroundPrimary:
             return .white
         case .backgroundSecondary:
             return .init(white: 0.85, alpha: 1.0)
         case .groupedBackground:
-            return .init(red: 250/255, green: 251/255, blue: 252/255, alpha: 1)
+            return .init(red: 250.0 / 255.0, green: 251.0 / 255.0, blue: 252.0 / 255.0, alpha: 1)
         case .border:
-            return .init(red: 232/255, green: 232/255, blue: 235/255, alpha: 1)
+            return .init(red: 232.0 / 255.0, green: 232.0 / 255.0, blue: 235.0 / 255.0, alpha: 1)
         case .shadow:
-            return .init(red: 233/255, green: 233/255, blue: 241/255, alpha: 1)
+            return .init(red: 233.0 / 255.0, green: 233.0 / 255.0, blue: 241.0 / 255.0, alpha: 1)
         }
     }
 }

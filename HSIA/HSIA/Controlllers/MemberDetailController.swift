@@ -23,7 +23,14 @@ class MemberDetailController: UICollectionViewController, UICollectionViewDelega
         self.collectionView.register(MemberDetailTableViewCell.self, forCellWithReuseIdentifier: cellTableViewId)
         self.collectionView.register(MemberDetailTextFieldCell.self, forCellWithReuseIdentifier: cellTextFieldId)
         
-        self.collectionView.contentInset = .init(top: 16, left: 0, bottom: 16, right: 0)
+        var bottomInset: CGFloat = 0
+        if let _ = member {
+            bottomInset = Sizing.twoButtonsCollectionViewBottomInset
+        } else {
+            bottomInset = Sizing.oneButtonCollectionViewBottomInset
+        }
+        
+        self.collectionView.contentInset = .init(top: 16, left: 0, bottom: bottomInset, right: 0)
         
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
@@ -33,37 +40,11 @@ class MemberDetailController: UICollectionViewController, UICollectionViewDelega
         
         self.collectionView.keyboardDismissMode = .interactive
         
-        //        if let path = Bundle.main.path(forResource: "hipo", ofType: "json") {
-        //            do {
-        //                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-        //                decodeJSONData(data: data) { (res: HipoModel?, err) in
-        //                    if let err = err {
-        //                        print("Failed to decode:", err)
-        //                        return
-        //                    }
-        //                    print(res?.members)
-        //                }
-        //            } catch {
-        //                print(error)
-        //            }
-        //        }
-        
-        
-    }
-    
-    func decodeJSONData<U: Codable>(data: Data?, completion: @escaping (U?, Error?) -> ()) {
-        guard let data = data else { return }
-        do {
-            let objects = try JSONDecoder().decode(U.self, from: data)
-            completion(objects, nil)
-        } catch {
-            completion(nil, error)
-        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! MemberDetailHeader
-        header.setData(image: nil, text: "S e r")
+        header.setData(image: nil, text: member?.name ?? "")
         return header
     }
     
@@ -83,34 +64,32 @@ class MemberDetailController: UICollectionViewController, UICollectionViewDelega
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellTextFieldId, for: indexPath) as! MemberDetailTextFieldCell
-            cell.setData(iconName: .person, text: nil, placeholder: "Position", isJustNumber: false)
+            cell.setData(iconName: .name, text: member?.name, placeholder: "Name", isJustNumber: false)
             return cell
         case 2:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellTextFieldId, for: indexPath) as! MemberDetailTextFieldCell
-            cell.setData(iconName: .calendar, text: nil, placeholder: "Years in Hipo", isJustNumber: true)
+            cell.setData(iconName: .github, text: member?.github, placeholder: "Github Username", isJustNumber: false)
             return cell
         case 3:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellTextFieldId, for: indexPath) as! MemberDetailTextFieldCell
-            cell.setData(iconName: .name, text: nil, placeholder: "Name", isJustNumber: false)
+            cell.setData(iconName: .calendar, text: member?.age.stringValue, placeholder: "Age", isJustNumber: true)
             return cell
         case 4:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellTextFieldId, for: indexPath) as! MemberDetailTextFieldCell
-            cell.setData(iconName: .calendar, text: nil, placeholder: "Age", isJustNumber: true)
+            cell.setData(iconName: .map, text: member?.location, placeholder: "Location", isJustNumber: false)
             return cell
         case 5:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellTextFieldId, for: indexPath) as! MemberDetailTextFieldCell
-            cell.setData(iconName: .map, text: nil, placeholder: "Location", isJustNumber: false)
+            cell.setData(iconName: .person, text: member?.hipo.position, placeholder: "Position", isJustNumber: false)
             return cell
         case 6:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellTextFieldId, for: indexPath) as! MemberDetailTextFieldCell
-            cell.setData(iconName: .github, text: nil, placeholder: "Github Username", isJustNumber: false)
+            cell.setData(iconName: .calendar, text: member?.hipo.yearsInHipo.stringValue, placeholder: "Years in Hipo", isJustNumber: true)
             return cell
         default:
             assert(false, "Unexpected indexPath")
         }
     }
-    
-    
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == 0 {

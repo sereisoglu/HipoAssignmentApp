@@ -10,6 +10,12 @@ import UIKit
 
 class MainController: UIViewController {
     
+    convenience init(){
+        self.init(nibName:nil, bundle:nil)
+        
+        decodeJSONDataFile()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,8 +26,37 @@ class MainController: UIViewController {
         setupButtonsLayer()
     }
     
+    fileprivate var members: [MemberModel]!
+    
+    fileprivate func decodeJSONDataFile() {
+        if let path = Bundle.main.path(forResource: "hipo", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                decodeJSONData(data: data) { (res: HipoModel?, err) in
+                    if let err = err {
+                        print("Failed to decode:", err)
+                        return
+                    }
+                    self.members = res?.members ?? []
+                }
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    fileprivate func decodeJSONData<U: Codable>(data: Data?, completion: @escaping (U?, Error?) -> ()) {
+        guard let data = data else { return }
+        do {
+            let objects = try JSONDecoder().decode(U.self, from: data)
+            completion(objects, nil)
+        } catch {
+            completion(nil, error)
+        }
+    }
+    
     fileprivate func setupMembersController() {
-        let membersController = MembersController()
+        let membersController = MembersController(members: members)
         membersController.mainController = self
         
         membersController.view.addFillSuperview(superview: self.view)
@@ -42,7 +77,13 @@ class MainController: UIViewController {
         ])
         
         let sortMembersButton = HSIAButtonRectangle(text: "sort members", type: .primary)
+        sortMembersButton.tag = 1
         let addNewMemberButton = HSIAButtonRectangle(text: "add new member", type: .secondary)
+        addNewMemberButton.tag = 2
+        
+        [sortMembersButton, addNewMemberButton].forEach {
+            $0.addTarget(self, action: #selector(handleButtons(_:)), for: .primaryActionTriggered)
+        }
         
         buttonsLayer.hstack(
             buttonsLayer.stack(
@@ -50,7 +91,18 @@ class MainController: UIViewController {
                 addNewMemberButton, spacing: 16
             ), alignment: .top
         ).withMargins(.init(top: 16, left: 45, bottom: 0, right: 45))
-        
+    }
+    
+    @objc fileprivate func handleButtons(_ button: UIButton) {
+        switch button.tag {
+        case 1:
+            print("Sort Members")
+        case 2:
+            let detailController = DetailController()
+            self.navigationController?.pushViewController(detailController, animated: true)
+        default:
+            return
+        }
     }
     
 }

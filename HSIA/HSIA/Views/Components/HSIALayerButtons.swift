@@ -15,8 +15,6 @@ class HSIALayerButtons: UIView {
     init() {
         super.init(frame: CGRect.zero)
         
-        self.backgroundColor = .red
-        
         blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
         blurEffectView.frame = self.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

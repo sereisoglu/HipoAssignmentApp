@@ -14,6 +14,7 @@ class HSIAButtonRectangle: UIButton {
     enum `Type` {
         case primary
         case secondary
+        case tertiary
         
         var backgroundColor: UIColor {
             switch self {
@@ -21,6 +22,8 @@ class HSIAButtonRectangle: UIButton {
                 return HSIAColor.buttonPrimary.color
             case .secondary:
                 return HSIAColor.buttonSecondary.color
+            case .tertiary:
+                return HSIAColor.buttonTertiary.color
             }
         }
     }

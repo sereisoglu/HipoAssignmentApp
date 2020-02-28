@@ -14,14 +14,18 @@ class DetailController: UIViewController {
     
     convenience init(member: MemberModel? = nil){
         self.init(nibName:nil, bundle:nil)
-        
+        self.member = member
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationItem.title = "Hipo Members"
+        if let _ = member {
+            self.navigationItem.title = "Edit Member"
+        } else {
+            self.navigationItem.title = "New Member"
+        }
         
         setupMembersController()
         setupButtonsLayer()
@@ -41,21 +45,54 @@ class DetailController: UIViewController {
         self.view.addSubview(buttonsLayer)
         
         NSLayoutConstraint.activate([
-            buttonsLayer.heightAnchor.constraint(equalToConstant: Sizing.twoButtonsLayerHeight),
             buttonsLayer.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             buttonsLayer.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             buttonsLayer.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
         ])
         
-        let sortMembersButton = HSIAButtonRectangle(text: "sort members", type: .primary)
-        let addNewMemberButton = HSIAButtonRectangle(text: "add new member", type: .secondary)
-        
-        buttonsLayer.hstack(
-            buttonsLayer.stack(
-                sortMembersButton,
-                addNewMemberButton, spacing: 16
-            ), alignment: .top
-        ).withMargins(.init(top: 16, left: 45, bottom: 0, right: 45))
+        if let _ = member {
+            buttonsLayer.heightAnchor.constraint(equalToConstant: Sizing.twoButtonsLayerHeight).isActive = true
+            
+            let deleteButton = HSIAButtonRectangle(text: "delete", type: .tertiary)
+            deleteButton.tag = 1
+            let saveButton = HSIAButtonRectangle(text: "save", type: .secondary)
+            saveButton.tag = 2
+            
+            [deleteButton, saveButton].forEach {
+                $0.addTarget(self, action: #selector(handleButtons(_:)), for: .primaryActionTriggered)
+            }
+            
+            buttonsLayer.hstack(
+                buttonsLayer.stack(
+                    deleteButton,
+                    saveButton, spacing: 16
+                ), alignment: .top
+            ).withMargins(.init(top: 16, left: 45, bottom: 0, right: 45))
+        } else {
+            buttonsLayer.heightAnchor.constraint(equalToConstant: Sizing.oneButtonLayerHeight).isActive = true
+            
+            let createButton = HSIAButtonRectangle(text: "create", type: .secondary)
+            createButton.tag = 3
+            
+            createButton.addTarget(self, action: #selector(handleButtons(_:)), for: .primaryActionTriggered)
+            
+            buttonsLayer.hstack(
+                createButton, alignment: .top
+            ).withMargins(.init(top: 16, left: 45, bottom: 0, right: 45))
+        }
+    }
+    
+    @objc fileprivate func handleButtons(_ button: UIButton) {
+        switch button.tag {
+        case 1:
+            print("Delete")
+        case 2:
+            print("Save")
+        case 3:
+            print("Create")
+        default:
+            return
+        }
     }
     
 }

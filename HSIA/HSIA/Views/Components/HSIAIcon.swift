@@ -14,6 +14,7 @@ enum HSIAIconName: String {
     case camera
     case chevronRight
     case github
+    case hipo
     case map
     case name
     case person
