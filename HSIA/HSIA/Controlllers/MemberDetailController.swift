@@ -93,14 +93,29 @@ class MemberDetailController: UICollectionViewController, UICollectionViewDelega
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-//            let actionSheetController = CustomAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-//
-//            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
-//
-//            let movieMoveToWatchListAlertAction = UIAlertAction(title: "Remove", style: .destructive) { (_) in
-//                print("movieMoveToWatchListAlert")
-//                self.setData(type: .movieWatchList)
-//            }
+            let actionSheetController = CustomAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            
+            var alertActions = [UIAlertAction]()
+            let alertActionTitles = ["Frontend Team", "Backend Team", "iOS Team", "Android Team", "Design Team"]
+            
+            alertActionTitles.enumerated().forEach { (index, item) in
+                let alertAction = UIAlertAction(title: item, style: .default) { (_) in
+                    let cell = collectionView.cellForItem(at: .init(row: 0, section: 0)) as! MemberDetailTableViewCell
+                    cell.setData(iconName: .team, text: item)
+                    print("Clicked -->", index)
+                }
+                alertActions.append(alertAction)
+            }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+            alertActions.append(cancelAction)
+            
+            alertActions.forEach {
+                actionSheetController.addAction($0)
+            }
+            
+            // https://stackoverflow.com/questions/55653187/swift-default-alertviewcontroller-breaking-constraints
+            actionSheetController.pruneNegativeWidthConstraints()
+            self.present(actionSheetController, animated: true, completion: nil)
         }
     }
     
