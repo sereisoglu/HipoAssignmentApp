@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DifferenceKit
 
 struct Sort {
     static func members(members: [MemberModel], character: String) -> [MemberModel] {
@@ -33,8 +34,13 @@ class MembersController: UICollectionViewController, UICollectionViewDelegateFlo
     
     func sortMembers() {
         // When the Sort button is tapped, please call this function for the last names of the members, for the character “a” and update the UI with respect to the sorted list.
-        members = Sort.members(members: members, character: "a")
-        self.collectionView.reloadData()
+        let newMembers = Sort.members(members: members, character: "a")
+        
+        let changeset = StagedChangeset(source: members, target: newMembers)
+        
+        collectionView.reload(using: changeset, interrupt: { $0.changeCount > 100 }) { (data) in
+            self.members = data
+        }
     }
     
     var mainController: UIViewController?

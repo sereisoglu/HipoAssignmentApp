@@ -15,6 +15,7 @@
 		4A437ACB2408040400659F02 /* HSIAIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A437ACA2408040400659F02 /* HSIAIcon.swift */; };
 		4A437ACE240804D700659F02 /* HSIAColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A437ACD240804D700659F02 /* HSIAColor.swift */; };
 		4A437AD0240804E200659F02 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A437ACF240804E200659F02 /* StringExtension.swift */; };
+		4A7555F9240AAF9200620023 /* DifferenceKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4A7555F8240AAF9200620023 /* DifferenceKit */; };
 		4ABC7AA824080B0F00972675 /* HSIALabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7AA724080B0F00972675 /* HSIALabel.swift */; };
 		4ABC7AAA24080C9400972675 /* AttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7AA924080C9400972675 /* AttributedString.swift */; };
 		4ABC7AAC24080D3D00972675 /* HSIAImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7AAB24080D3D00972675 /* HSIAImageView.swift */; };
@@ -88,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A7555F9240AAF9200620023 /* DifferenceKit in Frameworks */,
 				4A437AC12407EF4F00659F02 /* LBTATools in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -219,6 +221,7 @@
 			name = HSIA;
 			packageProductDependencies = (
 				4A437AC02407EF4F00659F02 /* LBTATools */,
+				4A7555F8240AAF9200620023 /* DifferenceKit */,
 			);
 			productName = HSIA;
 			productReference = 4A437AA82407EDC200659F02 /* HSIA.app */;
@@ -250,6 +253,7 @@
 			mainGroup = 4A437A9F2407EDC200659F02;
 			packageReferences = (
 				4A437ABF2407EF4F00659F02 /* XCRemoteSwiftPackageReference "LBTATools" */,
+				4A7555F7240AAF9200620023 /* XCRemoteSwiftPackageReference "DifferenceKit" */,
 			);
 			productRefGroup = 4A437AA92407EDC200659F02 /* Products */;
 			projectDirPath = "";
@@ -510,6 +514,14 @@
 				minimumVersion = 1.0.17;
 			};
 		};
+		4A7555F7240AAF9200620023 /* XCRemoteSwiftPackageReference "DifferenceKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ra1028/DifferenceKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.5;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -517,6 +529,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4A437ABF2407EF4F00659F02 /* XCRemoteSwiftPackageReference "LBTATools" */;
 			productName = LBTATools;
+		};
+		4A7555F8240AAF9200620023 /* DifferenceKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4A7555F7240AAF9200620023 /* XCRemoteSwiftPackageReference "DifferenceKit" */;
+			productName = DifferenceKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
