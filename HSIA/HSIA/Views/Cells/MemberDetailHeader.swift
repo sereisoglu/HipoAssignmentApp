@@ -10,6 +10,12 @@ import UIKit
 
 class MemberDetailHeader: UICollectionReusableView {
     
+    var delegate: HSIATableViewRowImageSelectDelegate? {
+        didSet {
+            tableViewCell.delegate = delegate
+        }
+    }
+    
     fileprivate var tableViewCell: HSIATableViewRowImageSelect!
     
     override init(frame: CGRect) {

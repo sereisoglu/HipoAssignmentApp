@@ -175,6 +175,8 @@
 				4ABC7AA724080B0F00972675 /* HSIALabel.swift */,
 				4A437ACA2408040400659F02 /* HSIAIcon.swift */,
 				4ABC7AAB24080D3D00972675 /* HSIAImageView.swift */,
+				4ABC7AC12408764B00972675 /* HSIALayerTableViewAndTextField.swift */,
+				4ABC7AC3240889FD00972675 /* HSIALayerButtons.swift */,
 				4ABC7AAF2408123F00972675 /* HSIAButtonRectangle.swift */,
 				4ABC7AB12408124700972675 /* HSIAButtonCircle.swift */,
 				4ABC7ABD2408211B00972675 /* CustomTextField.swift */,
@@ -183,8 +185,6 @@
 				4ABC7AB72408128500972675 /* HSIATableViewRowMedium.swift */,
 				4ABC7AB92408128F00972675 /* HSIATableViewRowLarge.swift */,
 				4ABC7ABB2408129700972675 /* HSIATableViewRowImageSelect.swift */,
-				4ABC7AC12408764B00972675 /* HSIALayerTableViewAndTextField.swift */,
-				4ABC7AC3240889FD00972675 /* HSIALayerButtons.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";

@@ -29,6 +29,9 @@ class HSIAButtonCircle: UIButton {
         
         self.withSize(.equalEdge(44))
         icon.addCenterInSuperview(superview: self)
+        
+        icon.isUserInteractionEnabled = false
+        blurEffectView.isUserInteractionEnabled = false
     }
     
     required init?(coder: NSCoder) {

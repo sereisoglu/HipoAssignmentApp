@@ -45,6 +45,7 @@ class MemberDetailController: UICollectionViewController, UICollectionViewDelega
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! MemberDetailHeader
         header.setData(image: nil, text: member?.name ?? "")
+        header.delegate = self
         return header
     }
     
@@ -84,7 +85,7 @@ class MemberDetailController: UICollectionViewController, UICollectionViewDelega
             return cell
         case 6:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellTextFieldId, for: indexPath) as! MemberDetailTextFieldCell
-            cell.setData(iconName: .calendar, text: member?.hipo.yearsInHipo.stringValue, placeholder: "Years in Hipo", isJustNumber: true)
+            cell.setData(iconName: .hipo, text: member?.hipo.yearsInHipo.stringValue, placeholder: "Years in Hipo", isJustNumber: true)
             return cell
         default:
             assert(false, "Unexpected indexPath")
@@ -96,7 +97,7 @@ class MemberDetailController: UICollectionViewController, UICollectionViewDelega
             let actionSheetController = CustomAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             
             var alertActions = [UIAlertAction]()
-            let alertActionTitles = ["Frontend Team", "Backend Team", "iOS Team", "Android Team", "Design Team"]
+            let alertActionTitles = ["QA Automation Team", "Hardware Team", "Android Team", "iOS Team", "Web Frontend Team", "Backend Team"]
             
             alertActionTitles.enumerated().forEach { (index, item) in
                 let alertAction = UIAlertAction(title: item, style: .default) { (_) in
@@ -133,6 +134,36 @@ class MemberDetailController: UICollectionViewController, UICollectionViewDelega
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension MemberDetailController: HSIATableViewRowImageSelectDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func handleButton() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.modalPresentationStyle = .currentContext
+        self.present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        // image boyutu cok buyukse kucult
+        
+        let cell = collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: .init(item: 0, section: 0)) as! MemberDetailHeader
+        
+        if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            cell.setData(image: editedImage, text: member?.name ?? "")
+        } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            cell.setData(image: originalImage, text: member?.name ?? "")
+        }
+        
+        picker.dismiss(animated: true)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
     }
     
 }
