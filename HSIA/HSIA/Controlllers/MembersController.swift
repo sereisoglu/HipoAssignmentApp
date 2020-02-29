@@ -56,6 +56,7 @@ class MembersController: UICollectionViewController, UICollectionViewDelegateFlo
         self.collectionView.register(MembersHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
         self.collectionView.register(MembersCell.self, forCellWithReuseIdentifier: cellId)
         
+        self.collectionView.alwaysBounceVertical = true
         self.collectionView.contentInset = .init(top: 16, left: 0, bottom: Sizing.twoButtonsCollectionViewBottomInset, right: 0)
     }
     
@@ -76,7 +77,7 @@ class MembersController: UICollectionViewController, UICollectionViewDelegateFlo
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MembersCell
         let member = members[indexPath.row]
-        cell.setData(image: nil, text: member.name, subText: "@\(member.github)")
+        cell.setData(image: nil, text: member.name, subText: "@\(member.github)\n\(member.hipo.position)")
         return cell
     }
     
@@ -90,7 +91,7 @@ class MembersController: UICollectionViewController, UICollectionViewDelegateFlo
     
     init(members: [MemberModel]) {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = .init(width: Sizing.oneColumn, height: 64)
+        layout.itemSize = .init(width: Sizing.oneColumn, height: 84)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 12
 //        layout.headerReferenceSize = .init(width: Sizing.deviceSize.width, height: 100)

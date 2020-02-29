@@ -22,7 +22,7 @@ class HSIATableViewRowLarge: UIView {
         
         imageView = HSIAImageView(size: .pt42)
         label = HSIALabel(text: nil, type: .body1, weight: .medium, color: .labelPrimary)
-        sublabel = HSIALabel(text: nil, type: .body2, weight: .medium, color: .labelSecondary)
+        sublabel = HSIALabel(text: nil, type: .body2, weight: .medium, color: .labelSecondary, numberOfLines: 2)
         icon = HSIAIcon(size: .pt22, icon: .chevronRight, tintColor: .labelPrimary)
         background = HSIALayerTableViewAndTextField()
         
@@ -31,7 +31,9 @@ class HSIATableViewRowLarge: UIView {
         background.addFillSuperview(superview: self)
         
         hstack(
-            imageView,
+            hstack(
+                imageView, alignment: .top
+            ),
             hstack(
                 stack(
                     label,
