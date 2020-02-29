@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="HipoCDModel" representedClassName="HipoCDModel" syncable="YES" codeGenerationType="class">
+        <attribute name="position" optional="YES" attributeType="String"/>
+        <attribute name="yearsInHipo" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="member" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MemberCDModel" inverseName="hipo" inverseEntity="MemberCDModel"/>
+    </entity>
+    <entity name="MemberCDModel" representedClassName="MemberCDModel" syncable="YES" codeGenerationType="class">
+        <attribute name="age" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="github" optional="YES" attributeType="String"/>
+        <attribute name="location" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="hipo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HipoCDModel" inverseName="member" inverseEntity="HipoCDModel"/>
+        <relationship name="team" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeamCDModel" inverseName="members" inverseEntity="TeamCDModel"/>
+    </entity>
+    <entity name="TeamCDModel" representedClassName="TeamCDModel" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MemberCDModel" inverseName="team" inverseEntity="MemberCDModel"/>
+    </entity>
+    <elements>
+        <element name="MemberCDModel" positionX="-13.75390625" positionY="-10.1328125" width="128" height="133"/>
+        <element name="TeamCDModel" positionX="-291.59375" positionY="-87.96875" width="128" height="73"/>
+        <element name="HipoCDModel" positionX="242.19140625" positionY="19.91796875" width="128" height="88"/>
+    </elements>
+</model>

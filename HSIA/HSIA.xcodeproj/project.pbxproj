@@ -16,6 +16,7 @@
 		4A437ACE240804D700659F02 /* HSIAColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A437ACD240804D700659F02 /* HSIAColor.swift */; };
 		4A437AD0240804E200659F02 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A437ACF240804E200659F02 /* StringExtension.swift */; };
 		4A7555F9240AAF9200620023 /* DifferenceKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4A7555F8240AAF9200620023 /* DifferenceKit */; };
+		4A7555FE240AC05F00620023 /* HSIACDModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A7555FC240AC05F00620023 /* HSIACDModel.xcdatamodeld */; };
 		4ABC7AA824080B0F00972675 /* HSIALabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7AA724080B0F00972675 /* HSIALabel.swift */; };
 		4ABC7AAA24080C9400972675 /* AttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7AA924080C9400972675 /* AttributedString.swift */; };
 		4ABC7AAC24080D3D00972675 /* HSIAImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7AAB24080D3D00972675 /* HSIAImageView.swift */; };
@@ -55,6 +56,7 @@
 		4A437ACA2408040400659F02 /* HSIAIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSIAIcon.swift; sourceTree = "<group>"; };
 		4A437ACD240804D700659F02 /* HSIAColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSIAColor.swift; sourceTree = "<group>"; };
 		4A437ACF240804E200659F02 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		4A7555FD240AC05F00620023 /* HSIACDModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HSIACDModel.xcdatamodel; sourceTree = "<group>"; };
 		4ABC7AA724080B0F00972675 /* HSIALabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSIALabel.swift; sourceTree = "<group>"; };
 		4ABC7AA924080C9400972675 /* AttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedString.swift; sourceTree = "<group>"; };
 		4ABC7AAB24080D3D00972675 /* HSIAImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSIAImageView.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 		4A437AC82408037D00659F02 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4A7555FC240AC05F00620023 /* HSIACDModel.xcdatamodeld */,
 				4ACFB91524098BBA00092CFC /* HipoModel.swift */,
 			);
 			path = Models;
@@ -295,6 +298,7 @@
 				4ABC7AB82408128500972675 /* HSIATableViewRowMedium.swift in Sources */,
 				4ABC7ABC2408129700972675 /* HSIATableViewRowImageSelect.swift in Sources */,
 				4ABC7AAE24080EB500972675 /* LBTAToolsExtension.swift in Sources */,
+				4A7555FE240AC05F00620023 /* HSIACDModel.xcdatamodeld in Sources */,
 				4ABC7ABE2408211B00972675 /* CustomTextField.swift in Sources */,
 				4ABC7AA824080B0F00972675 /* HSIALabel.swift in Sources */,
 				4ABC7AC4240889FD00972675 /* HSIALayerButtons.swift in Sources */,
@@ -536,6 +540,19 @@
 			productName = DifferenceKit;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		4A7555FC240AC05F00620023 /* HSIACDModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4A7555FD240AC05F00620023 /* HSIACDModel.xcdatamodel */,
+			);
+			currentVersion = 4A7555FD240AC05F00620023 /* HSIACDModel.xcdatamodel */;
+			path = HSIACDModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4A437AA02407EDC200659F02 /* Project object */;
 }
