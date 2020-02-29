@@ -10,22 +10,6 @@ import UIKit
 
 class MainController: UIViewController {
     
-    convenience init(){
-        self.init(nibName:nil, bundle:nil)
-        
-        decodeJSONDataFile()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationItem.title = "Hipo Members"
-        
-        setupMembersController()
-        setupButtonsLayer()
-    }
-    
     fileprivate var members: [MemberModel]!
     
     fileprivate func decodeJSONDataFile() {
@@ -55,8 +39,27 @@ class MainController: UIViewController {
         }
     }
     
+    convenience init(){
+        self.init(nibName:nil, bundle:nil)
+        
+        decodeJSONDataFile()
+        members.append(.init(name: "Saffet Emin Reisoglu", location: "Sakarya", github: "sereisoglu", age: 21, hipo: .init(position: "Stajyer", yearsInHipo: 0)))
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.title = "Hipo Members"
+        
+        setupMembersController()
+        setupButtonsLayer()
+    }
+    
+    fileprivate var membersController: MembersController!
+    
     fileprivate func setupMembersController() {
-        let membersController = MembersController(members: members)
+        membersController = MembersController(members: members)
         membersController.mainController = self
         
         membersController.view.addFillSuperview(superview: self.view)
@@ -96,7 +99,7 @@ class MainController: UIViewController {
     @objc fileprivate func handleButtons(_ button: UIButton) {
         switch button.tag {
         case 1:
-            print("Sort Members")
+            membersController.sortMembers()
         case 2:
             let detailController = DetailController()
             self.navigationController?.pushViewController(detailController, animated: true)

@@ -8,7 +8,34 @@
 
 import UIKit
 
+struct Sort {
+    static func members(members: [MemberModel], character: String) -> [MemberModel] {
+        var sortedArr = members
+        sortedArr.sort(by: {
+            let lastName1 = $0.name.findLastName()
+            let lastName2 = $1.name.findLastName()
+            // By using the extension function you wrote, find the most occurences of the character for each string in the array and sort in descending order.
+            if lastName1.countNumberOfOccurrencesOfCharacter(char: character) != lastName2.countNumberOfOccurrencesOfCharacter(char: character) {
+                return lastName1.countNumberOfOccurrencesOfCharacter(char: character) > lastName2.countNumberOfOccurrencesOfCharacter(char: character)
+                // If two or more strings contain the same amount for the character, sort these according to their length.
+            } else if lastName1.count != lastName2.count {
+                return lastName1.count > lastName2.count
+                // If two or more strings contain the same amount for the character and have the same length, sort these in alphabetical order.
+            } else {
+                return lastName1 < lastName2
+            }
+        })
+        return sortedArr
+    }
+}
+
 class MembersController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    
+    func sortMembers() {
+        // When the Sort button is tapped, please call this function for the last names of the members, for the character “a” and update the UI with respect to the sorted list.
+        members = Sort.members(members: members, character: "a")
+        self.collectionView.reloadData()
+    }
     
     var mainController: UIViewController?
     
