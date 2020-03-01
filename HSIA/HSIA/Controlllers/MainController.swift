@@ -10,14 +10,6 @@ import UIKit
 
 class MainController: UIViewController {
     
-    fileprivate var members: [MemberCDModel]!
-    
-    convenience init(){
-        self.init(nibName:nil, bundle:nil)
-        
-        members = CoreDataManager.shared.fetchMembers()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,7 +23,7 @@ class MainController: UIViewController {
     fileprivate var membersController: MembersController!
     
     fileprivate func setupMembersController() {
-        membersController = MembersController(members: members)
+        membersController = MembersController()
         membersController.mainController = self
         
         membersController.view.addFillSuperview(superview: self.view)

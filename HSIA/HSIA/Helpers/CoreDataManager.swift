@@ -161,7 +161,7 @@ struct CoreDataManager {
         }
     }
     
-    fileprivate func decodeJSONData<U: Codable>(data: Data?, completion: @escaping (U?, Error?) -> ()) {
+    fileprivate func decodeJSONData<U: Decodable>(data: Data?, completion: @escaping (U?, Error?) -> ()) {
         guard let data = data else { return }
         do {
             let objects = try JSONDecoder().decode(U.self, from: data)

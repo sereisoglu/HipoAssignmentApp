@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol DetailControllerDelegate {
+    func handleDeletedMember(member: MemberCDModel)
+}
+
 class DetailController: UIViewController {
+    
+    var delegate: DetailControllerDelegate?
     
     fileprivate var member: MemberCDModel?
     
@@ -86,6 +92,11 @@ class DetailController: UIViewController {
         switch button.tag {
         case 1:
             print("Delete")
+            if let member = member {
+                CoreDataManager.shared.deleteMember(member: member)
+                delegate?.handleDeletedMember(member: member)
+                self.navigationController?.popViewController(animated: true)
+            }
         case 2:
             print("Save")
         case 3:

@@ -9,11 +9,11 @@
 import UIKit
 
 struct Sort {
-    static func members(members: [MemberModel], character: String) -> [MemberModel] {
+    static func members(members: [MemberCDModel], character: String) -> [MemberCDModel] {
         var sortedArr = members
         sortedArr.sort(by: {
-            let lastName1 = $0.name.findLastName()
-            let lastName2 = $1.name.findLastName()
+            let lastName1 = $0.name?.findLastName() ?? ""
+            let lastName2 = $1.name?.findLastName() ?? ""
             // By using the extension function you wrote, find the most occurences of the character for each string in the array and sort in descending order.
             if lastName1.countNumberOfOccurrencesOfCharacter(char: character) != lastName2.countNumberOfOccurrencesOfCharacter(char: character) {
                 return lastName1.countNumberOfOccurrencesOfCharacter(char: character) > lastName2.countNumberOfOccurrencesOfCharacter(char: character)
@@ -29,20 +29,33 @@ struct Sort {
     }
 }
 
-class MembersController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class MembersController: UICollectionViewController, DetailControllerDelegate {
+    
+    func handleDeletedMember(member: MemberCDModel) {
+        let index = members.firstIndex(of: member)
+        guard let item = index else { return }
+        let indexPath = IndexPath(item: item, section: 0)
+        members.remove(at: item)
+        self.collectionView.deleteItems(at: [indexPath])
+    }
     
     func sortMembers() {
         // When the Sort button is tapped, please call this function for the last names of the members, for the character “a” and update the UI with respect to the sorted list.
-//        let newMembers = Sort.members(members: members, character: "a")
+        members = Sort.members(members: members, character: "a")
+        self.collectionView.reloadData()
     }
     
     var mainController: UIViewController?
+    
+    fileprivate var members: [MemberCDModel]!
     
     fileprivate let headerId = "headerId"
     fileprivate let cellId = "cellId"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.members = CoreDataManager.shared.fetchMembers()
         
         self.collectionView.backgroundColor = HSIAColor.backgroundPrimary.color
         
@@ -57,10 +70,6 @@ class MembersController: UICollectionViewController, UICollectionViewDelegateFlo
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! MembersHeader
         header.setData(headerText: "iOS Team")
         return header
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return .init(width: self.view.frame.width, height: 42)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -79,19 +88,17 @@ class MembersController: UICollectionViewController, UICollectionViewDelegateFlo
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let member = members[indexPath.row]
         let detailController = DetailController(member: member)
+        detailController.delegate = self
         mainController?.navigationController?.pushViewController(detailController, animated: true)
     }
     
-    fileprivate var members: [MemberCDModel]!
-    
-    init(members: [MemberCDModel]) {
+    init() {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = .init(width: Sizing.oneColumn, height: 84)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 12
-//        layout.headerReferenceSize = .init(width: Sizing.deviceSize.width, height: 100)
+        layout.headerReferenceSize = .init(width: Sizing.deviceSize.width, height: 42)
         super.init(collectionViewLayout: layout)
-        self.members = members
     }
     
     required init?(coder: NSCoder) {
