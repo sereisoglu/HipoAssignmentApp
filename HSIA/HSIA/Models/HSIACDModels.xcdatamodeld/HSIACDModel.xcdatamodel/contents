@@ -15,12 +15,13 @@
         <relationship name="team" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeamCDModel" inverseName="members" inverseEntity="TeamCDModel"/>
     </entity>
     <entity name="TeamCDModel" representedClassName="TeamCDModel" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MemberCDModel" inverseName="team" inverseEntity="MemberCDModel"/>
     </entity>
     <elements>
         <element name="HipoCDModel" positionX="242.19140625" positionY="19.91796875" width="128" height="88"/>
         <element name="MemberCDModel" positionX="-13.75390625" positionY="-10.1328125" width="128" height="148"/>
-        <element name="TeamCDModel" positionX="-291.59375" positionY="-87.96875" width="128" height="73"/>
+        <element name="TeamCDModel" positionX="-291.59375" positionY="-87.96875" width="128" height="88"/>
     </elements>
 </model>

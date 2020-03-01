@@ -9,6 +9,57 @@
 import UIKit
 import CoreData
 
+enum Teams: CaseIterable {
+    case iOS
+    case hardware
+    case android
+    case qaAutomation
+    case webFrontend
+    case backend
+    
+    var id: Int {
+        switch self {
+        case .iOS:
+            return 1
+        case .hardware:
+            return 2
+        case .android:
+            return 3
+        case .qaAutomation:
+            return 4
+        case .webFrontend:
+            return 5
+        case .backend:
+            return 6
+        }
+    }
+    
+    var name: String {
+        switch self {
+        case .iOS:
+            return "iOS Team"
+        case .hardware:
+            return "Hardware Team"
+        case .android:
+            return "Android Team"
+        case .qaAutomation:
+            return "QA Automation Team"
+        case .webFrontend:
+            return "Web Frontend Team"
+        case .backend:
+            return "Backend Team"
+        }
+    }
+    
+    static var allCasesNameArr: [String] {
+        var arr = [String]()
+        self.allCases.forEach {
+            arr.append($0.name)
+        }
+        return arr
+    }
+}
+
 struct CoreDataManager {
     
     static let shared = CoreDataManager()
@@ -41,14 +92,14 @@ struct CoreDataManager {
     // MARK: - CRUD
     
     // Create
-    func createMember(image: UIImage?, team: TeamCDModel, name: String, github: String, age: Int, location: String, position: String, yearsInHipo: Int) {
+    func createMember(image: UIImage?, teamId: Int, name: String, github: String, age: Int, location: String, position: String, yearsInHipo: Int) {
         let member = MemberCDModel(context: context)
         
         if let image = image {
             let imageData = image.jpegData(compressionQuality: 0.5)
             member.imageData = imageData
         }
-        member.team = team
+        member.team = fetchTeam(id: teamId)
         member.name = name
         member.github = github
         member.age = Int16(age)
@@ -76,10 +127,10 @@ struct CoreDataManager {
         }
     }
     
-    func fetchTeam(name: String)  -> TeamCDModel? {
+    func fetchTeam(id: Int)  -> TeamCDModel? {
         let fetchRequest: NSFetchRequest<TeamCDModel> = TeamCDModel.fetchRequest()
         fetchRequest.fetchLimit = 1
-        fetchRequest.predicate = NSPredicate(format: "name = %@", name)
+        fetchRequest.predicate = NSPredicate(format: "id = %@", "\(id)")
         
         do {
             let teams = try context.fetch(fetchRequest)
@@ -129,13 +180,16 @@ struct CoreDataManager {
     }
     
     fileprivate func createTeams() {
-        let teams = ["QA Automation Team", "Hardware Team", "Android Team", "iOS Team", "Web Frontend Team", "Backend Team"]
-        teams.forEach {
+        let teams = Teams.allCasesNameArr
+        teams.enumerated().forEach { (index, item) in
             let team = TeamCDModel(context: context)
-            team.name = $0
+            team.id = Int16(index + 1)
+            team.name = item
         }
         saveContext()
     }
+    
+    // For JSON File
     
     fileprivate func decodeJSONFile() {
         if let path = Bundle.main.path(forResource: "hipo", ofType: "json") {
@@ -147,12 +201,12 @@ struct CoreDataManager {
                         return
                     }
                     
-                    if let members = res?.members, let iOSTeam = self.fetchTeam(name: "iOS Team") {
+                    if let members = res?.members {
                         members.forEach {
-                            self.createMember(image: nil, team: iOSTeam, name: $0.name, github: $0.github, age: $0.age, location: $0.location, position: $0.hipo.position, yearsInHipo: $0.hipo.yearsInHipo)
+                            self.createMember(image: nil, teamId: Teams.iOS.id, name: $0.name, github: $0.github, age: $0.age, location: $0.location, position: $0.hipo.position, yearsInHipo: $0.hipo.yearsInHipo)
                         }
                         // I added myself.
-                        self.createMember(image: nil, team: iOSTeam, name: "Saffet Emin Reisoğlu", github: "sereisoglu", age: 21, location: "Sakarya", position: "Stajyer", yearsInHipo: 0)
+                        self.createMember(image: nil, teamId: Teams.iOS.id, name: "Saffet Emin Reisoğlu", github: "sereisoglu", age: 21, location: "Sakarya", position: "Stajyer", yearsInHipo: 0)
                     }
                 }
             } catch {

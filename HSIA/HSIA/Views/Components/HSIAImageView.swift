@@ -50,14 +50,19 @@ class HSIAImageView: UIView {
         imageView.addFillSuperview(superview: self)
     }
     
-    func setData(name: String) {
-        imageView.isHidden = true
-        label.setData(text: String(name.getAcronyms().prefix(3)))
+    func setData(name: String?, imageData: Data?) {
+        if let name = name {
+            imageView.isHidden = true
+            label.setData(text: String(name.getAcronyms().prefix(3)))
+        }
+        if let imageData = imageData {
+            imageView.isHidden = false
+            imageView.image = UIImage(data: imageData)
+        }
     }
     
-    func setData(image: UIImage) {
-        imageView.isHidden = false
-        imageView.image = image
+    func getData() -> UIImage? {
+        return imageView.image
     }
     
     required init?(coder: NSCoder) {

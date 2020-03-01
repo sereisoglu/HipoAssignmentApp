@@ -19,8 +19,8 @@ class MembersCell: UICollectionViewCell {
         tableViewCell.addFillSuperview(superview: self)
     }
     
-    func setData(image: UIImage?, text: String, subText: String) {
-        tableViewCell.setData(image: image, text: text, subText: subText)
+    func setData(imageData: Data?, text: String, subText: String) {
+        tableViewCell.setData(imageData: imageData, text: text, subText: subText)
     }
     
     required init?(coder: NSCoder) {

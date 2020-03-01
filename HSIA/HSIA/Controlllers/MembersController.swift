@@ -31,6 +31,11 @@ struct Sort {
 
 class MembersController: UICollectionViewController, DetailControllerDelegate {
     
+    func handleCreatedMember() {
+        members = CoreDataManager.shared.fetchMembers()
+        self.collectionView.reloadData()
+    }
+    
     func handleDeletedMember(member: MemberCDModel) {
         let index = members.firstIndex(of: member)
         guard let item = index else { return }
@@ -62,8 +67,8 @@ class MembersController: UICollectionViewController, DetailControllerDelegate {
         self.collectionView.register(MembersHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
         self.collectionView.register(MembersCell.self, forCellWithReuseIdentifier: cellId)
         
-        self.collectionView.alwaysBounceVertical = true
         self.collectionView.contentInset = .init(top: 16, left: 0, bottom: Sizing.twoButtonsCollectionViewBottomInset, right: 0)
+        self.collectionView.alwaysBounceVertical = true
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -80,7 +85,7 @@ class MembersController: UICollectionViewController, DetailControllerDelegate {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MembersCell
         let member = members[indexPath.row]
         if let name = member.name, let github = member.github, let position = member.hipo?.position {
-            cell.setData(image: nil, text: name, subText: "@\(github)\n\(position)")
+            cell.setData(imageData: member.imageData, text: name, subText: "@\(github)\n\(position)")
         }
         return cell
     }

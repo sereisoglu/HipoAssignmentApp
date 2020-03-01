@@ -28,8 +28,6 @@ class HSIATableViewRowImageSelect: UIView {
         imageView = HSIAImageView(size: .pt100)
         background = HSIALayerTableViewAndTextField()
         
-        self.withWidth(Sizing.oneColumn)
-        
         background.addFillSuperview(superview: self)
         
         stack(
@@ -45,12 +43,12 @@ class HSIATableViewRowImageSelect: UIView {
         delegate?.handleButton()
     }
     
-    func setData(image: UIImage?, text: String) {
-        if let image = image {
-            imageView.setData(image: image)
-        } else {
-            imageView.setData(name: text)
-        }
+    func setData(name: String?, imageData: Data?) {
+        imageView.setData(name: name, imageData: imageData)
+    }
+    
+    func getData() -> UIImage? {
+        return imageView.getData()
     }
     
     required init?(coder: NSCoder) {

@@ -35,7 +35,7 @@ class HSIATableViewRowMedium: UIView {
         ).withMargins(Sizing.paddingTableViewAndTextField)
     }
     
-    func setData(leftIconName: HSIAIconName, text: String) {
+    func setData(leftIconName: HSIAIconName? = nil, text: String? = nil) {
         leftIcon.setData(icon: leftIconName)
         label.setData(text: text)
     }

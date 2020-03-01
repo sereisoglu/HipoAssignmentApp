@@ -10,6 +10,7 @@ import UIKit
 
 protocol DetailControllerDelegate {
     func handleDeletedMember(member: MemberCDModel)
+    func handleCreatedMember()
 }
 
 class DetailController: UIViewController {
@@ -17,6 +18,8 @@ class DetailController: UIViewController {
     var delegate: DetailControllerDelegate?
     
     fileprivate var member: MemberCDModel?
+    
+    fileprivate var memberDetailController: MemberDetailController!
     
     convenience init(member: MemberCDModel? = nil){
         self.init(nibName:nil, bundle:nil)
@@ -38,10 +41,8 @@ class DetailController: UIViewController {
     }
     
     fileprivate func setupMembersController() {
-        let memberDetailController = MemberDetailController(member: member)
-        
+        memberDetailController = MemberDetailController(member: member)
         memberDetailController.view.addFillSuperview(superview: self.view)
-        
         self.addChild(memberDetailController)
     }
     
@@ -91,19 +92,19 @@ class DetailController: UIViewController {
     @objc fileprivate func handleButtons(_ button: UIButton) {
         switch button.tag {
         case 1:
-            print("Delete")
             if let member = member {
                 CoreDataManager.shared.deleteMember(member: member)
                 delegate?.handleDeletedMember(member: member)
-                self.navigationController?.popViewController(animated: true)
             }
         case 2:
             print("Save")
         case 3:
-            print("Create")
+            memberDetailController.createMember()
+            delegate?.handleCreatedMember()
         default:
             return
         }
+        self.navigationController?.popViewController(animated: true)
     }
     
 }

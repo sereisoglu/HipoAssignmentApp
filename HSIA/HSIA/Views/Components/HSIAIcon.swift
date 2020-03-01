@@ -43,7 +43,6 @@ class HSIAIcon: UIImageView {
         if let color = color {
             self.tintColor = color.color
         }
-        
     }
     
     required init?(coder: NSCoder) {

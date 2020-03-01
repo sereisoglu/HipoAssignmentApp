@@ -20,14 +20,13 @@ class CustomTextField: UITextField {
         self.withSize(Sizing.tableViewAndTextFieldSize)
     }
     
-    func setData(text: String?, placeholder: String?, keyboardType: UIKeyboardType = .default) {
+    func setData(text: String? = nil, placeholder: String? = nil) {
         if let text = text {
             self.text = text
         }
         if let placeholder = placeholder {
             self.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: AttributedString.generate(type: .body1, weight: .medium, color: HSIAColor.labelSecondary.color))
         }
-        self.keyboardType = keyboardType
     }
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {

@@ -46,12 +46,8 @@ class HSIATableViewRowLarge: UIView {
         ).withMargins(Sizing.paddingTableViewAndTextField)
     }
     
-    func setData(image: UIImage?, text: String, subText: String) {
-        if let image = image {
-            imageView.setData(image: image)
-        } else {
-            imageView.setData(name: text)
-        }
+    func setData(imageData: Data?, text: String, subText: String) {
+        imageView.setData(name: text, imageData: imageData)
         label.setData(text: text)
         sublabel.setData(text: subText)
     }

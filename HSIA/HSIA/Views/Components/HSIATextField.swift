@@ -17,23 +17,29 @@ class HSIATextField: UIView, UITextFieldDelegate {
     fileprivate var textField: CustomTextField!
     fileprivate var background: HSIALayerTableViewAndTextField!
     
-    init() {
+    init(iconName: HSIAIconName, placeholder: String, keyboardType: UIKeyboardType = .default) {
         super.init(frame: .zero)
         
         // Left View
         
         let leftView = UIView()
         
-        icon = HSIAIcon(size: .pt22, icon: nil, tintColor: .labelPrimary)
+        icon = HSIAIcon(size: .pt22, icon: iconName, tintColor: .labelPrimary)
         
         leftView.stack(
             icon, alignment: .trailing
         )
         // for ios11
         leftView.withSize(.init(width: Sizing.paddingTableViewAndTextField.left + 22, height: 22))
+        
         // Text Field
         
         textField = CustomTextField()
+        textField.setData(placeholder: placeholder)
+        textField.keyboardType = keyboardType
+        if keyboardType == .numberPad {
+            isJustNumber = true
+        }
         textField.delegate = self
         
         background = HSIALayerTableViewAndTextField()
@@ -57,14 +63,12 @@ class HSIATextField: UIView, UITextFieldDelegate {
         }
     }
     
-    func setData(iconName: HSIAIconName, text: String?, placeholder: String?, isJustNumber: Bool) {
-        icon.setData(icon: iconName)
-        if isJustNumber {
-            self.isJustNumber = isJustNumber
-            textField.setData(text: text, placeholder: placeholder, keyboardType: .numberPad)
-        } else {
-            textField.setData(text: text, placeholder: placeholder)
-        }
+    func setData(text: String?) {
+        textField.setData(text: text)
+    }
+    
+    func getData() -> String? {
+        return textField.text
     }
     
     required init?(coder: NSCoder) {

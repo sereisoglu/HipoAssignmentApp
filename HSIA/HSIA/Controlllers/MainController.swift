@@ -66,6 +66,7 @@ class MainController: UIViewController {
             membersController.sortMembers()
         case 2:
             let detailController = DetailController()
+            detailController.delegate = membersController
             self.navigationController?.pushViewController(detailController, animated: true)
         default:
             return
