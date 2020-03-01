@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import DifferenceKit
+//import DifferenceKit
 
 struct Sort {
     static func members(members: [MemberModel], character: String) -> [MemberModel] {
@@ -34,13 +34,13 @@ class MembersController: UICollectionViewController, UICollectionViewDelegateFlo
     
     func sortMembers() {
         // When the Sort button is tapped, please call this function for the last names of the members, for the character “a” and update the UI with respect to the sorted list.
-        let newMembers = Sort.members(members: members, character: "a")
+//        let newMembers = Sort.members(members: members, character: "a")
         
-        let changeset = StagedChangeset(source: members, target: newMembers)
+//        let changeset = StagedChangeset(source: members, target: newMembers)
         
-        collectionView.reload(using: changeset, interrupt: { $0.changeCount > 100 }) { (data) in
-            self.members = data
-        }
+//        collectionView.reload(using: changeset, interrupt: { $0.changeCount > 100 }) { (data) in
+//            self.members = data
+//        }
     }
     
     var mainController: UIViewController?
@@ -77,7 +77,9 @@ class MembersController: UICollectionViewController, UICollectionViewDelegateFlo
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MembersCell
         let member = members[indexPath.row]
-        cell.setData(image: nil, text: member.name, subText: "@\(member.github)\n\(member.hipo.position)")
+        if let name = member.name, let github = member.github, let position = member.hipo?.position {
+            cell.setData(image: nil, text: name, subText: "@\(github)\n\(position)")
+        }
         return cell
     }
     
@@ -87,9 +89,9 @@ class MembersController: UICollectionViewController, UICollectionViewDelegateFlo
         mainController?.navigationController?.pushViewController(detailController, animated: true)
     }
     
-    fileprivate var members: [MemberModel]!
+    fileprivate var members: [MemberCDModel]!
     
-    init(members: [MemberModel]) {
+    init(members: [MemberCDModel]) {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = .init(width: Sizing.oneColumn, height: 84)
         layout.minimumInteritemSpacing = 0

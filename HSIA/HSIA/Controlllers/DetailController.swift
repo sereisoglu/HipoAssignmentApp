@@ -10,9 +10,9 @@ import UIKit
 
 class DetailController: UIViewController {
     
-    fileprivate var member: MemberModel?
+    fileprivate var member: MemberCDModel?
     
-    convenience init(member: MemberModel? = nil){
+    convenience init(member: MemberCDModel? = nil){
         self.init(nibName:nil, bundle:nil)
         self.member = member
     }

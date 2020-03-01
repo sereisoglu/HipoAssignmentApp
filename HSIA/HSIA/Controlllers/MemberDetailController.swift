@@ -61,7 +61,11 @@ class MemberDetailController: UICollectionViewController, UICollectionViewDelega
         switch indexPath.row {
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellTableViewId, for: indexPath) as! MemberDetailTableViewCell
-            cell.setData(iconName: .team, text: "Select Team")
+            if let teamName = member?.team?.name {
+                cell.setData(iconName: .team, text: teamName)
+            } else {
+                cell.setData(iconName: .team, text: "Select Team")
+            }
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellTextFieldId, for: indexPath) as! MemberDetailTextFieldCell
@@ -81,11 +85,11 @@ class MemberDetailController: UICollectionViewController, UICollectionViewDelega
             return cell
         case 5:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellTextFieldId, for: indexPath) as! MemberDetailTextFieldCell
-            cell.setData(iconName: .person, text: member?.hipo.position, placeholder: "Position", isJustNumber: false)
+            cell.setData(iconName: .person, text: member?.hipo?.position, placeholder: "Position", isJustNumber: false)
             return cell
         case 6:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellTextFieldId, for: indexPath) as! MemberDetailTextFieldCell
-            cell.setData(iconName: .hipo, text: member?.hipo.yearsInHipo.stringValue, placeholder: "Years in Hipo", isJustNumber: true)
+            cell.setData(iconName: .hipo, text: member?.hipo?.yearsInHipo.stringValue, placeholder: "Years in Hipo", isJustNumber: true)
             return cell
         default:
             assert(false, "Unexpected indexPath")
@@ -120,9 +124,9 @@ class MemberDetailController: UICollectionViewController, UICollectionViewDelega
         }
     }
     
-    fileprivate var member: MemberModel?
+    fileprivate var member: MemberCDModel?
     
-    init(member: MemberModel?) {
+    init(member: MemberCDModel?) {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = .init(width: Sizing.oneColumn, height: 44)
         layout.minimumInteritemSpacing = 0

@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Int {
+extension Int16 {
     var stringValue: String {
         return "\(self)"
     }

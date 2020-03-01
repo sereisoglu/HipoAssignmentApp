@@ -7,43 +7,16 @@
 //
 
 import UIKit
+import CoreData
 
 class MainController: UIViewController {
     
-    fileprivate var members: [MemberModel]!
-    
-    fileprivate func decodeJSONDataFile() {
-        if let path = Bundle.main.path(forResource: "hipo", ofType: "json") {
-            do {
-                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                decodeJSONData(data: data) { (res: HipoModel?, err) in
-                    if let err = err {
-                        print("Failed to decode:", err)
-                        return
-                    }
-                    self.members = res?.members ?? []
-                }
-            } catch {
-                print(error)
-            }
-        }
-    }
-    
-    fileprivate func decodeJSONData<U: Codable>(data: Data?, completion: @escaping (U?, Error?) -> ()) {
-        guard let data = data else { return }
-        do {
-            let objects = try JSONDecoder().decode(U.self, from: data)
-            completion(objects, nil)
-        } catch {
-            completion(nil, error)
-        }
-    }
+    fileprivate var members: [MemberCDModel]!
     
     convenience init(){
         self.init(nibName:nil, bundle:nil)
         
-        decodeJSONDataFile()
-        members.append(.init(name: "Saffet Emin Reisoglu", location: "Sakarya", github: "sereisoglu", age: 21, hipo: .init(position: "Stajyer", yearsInHipo: 0)))
+        members = CoreDataManager.shared.fetchMembers()
     }
     
     override func viewDidLoad() {
