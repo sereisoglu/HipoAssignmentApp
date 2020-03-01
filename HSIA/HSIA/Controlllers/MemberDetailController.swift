@@ -12,7 +12,13 @@ class MemberDetailController: UICollectionViewController {
     
     fileprivate var selectedTeamId: Int?
     
-    fileprivate var member: MemberCDModel?
+    fileprivate var member: MemberCDModel? {
+        didSet {
+            if let id = member?.team?.id {
+                selectedTeamId = Int(id)
+            }
+        }
+    }
     
     fileprivate let cellId = "cellId"
     
@@ -48,16 +54,13 @@ class MemberDetailController: UICollectionViewController {
         return 1
     }
     
-    func getCell() -> MemberDetailCell {
-        let cell = self.collectionView.cellForItem(at: .init(row: 0, section: 0)) as! MemberDetailCell
-        return cell
-    }
-    
     func createMember() {
         let cell = self.collectionView.cellForItem(at: .init(row: 0, section: 0)) as! MemberDetailCell
         let memberInfo = cell.getData()
         if let teamId = selectedTeamId, let name = memberInfo.name, let github = memberInfo.githubUsername, let age = memberInfo.age, let ageInt = Int(age), let location = memberInfo.location, let position = memberInfo.position, let yearsInHipo = memberInfo.yearsInHipo, let yearsInHipoInt = Int(yearsInHipo) {
             CoreDataManager.shared.createMember(image: memberInfo.image, teamId: teamId, name: name, github: github, age: ageInt, location: location, position: position, yearsInHipo: yearsInHipoInt)
+        } else {
+            print("Bos alan birakalamaz")
         }
     }
     

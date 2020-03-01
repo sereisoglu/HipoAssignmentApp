@@ -10,6 +10,8 @@ import UIKit
 
 class MainController: UIViewController {
     
+    fileprivate var membersController: MembersController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,9 +20,16 @@ class MainController: UIViewController {
         
         setupMembersController()
         setupButtonsLayer()
+        
+        let iOSTeam = CoreDataManager.shared.fetchTeam(id: 1)
+        if let members = iOSTeam?.members?.allObjects as? [MemberCDModel] {
+            print("---------------------------------------------------------")
+            members.forEach {
+                print($0.name)
+            }
+            print("---------------------------------------------------------")
+        }
     }
-    
-    fileprivate var membersController: MembersController!
     
     fileprivate func setupMembersController() {
         membersController = MembersController()

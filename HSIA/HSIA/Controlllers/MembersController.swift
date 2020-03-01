@@ -8,47 +8,7 @@
 
 import UIKit
 
-struct Sort {
-    static func members(members: [MemberCDModel], character: String) -> [MemberCDModel] {
-        var sortedArr = members
-        sortedArr.sort(by: {
-            let lastName1 = $0.name?.findLastName() ?? ""
-            let lastName2 = $1.name?.findLastName() ?? ""
-            // By using the extension function you wrote, find the most occurences of the character for each string in the array and sort in descending order.
-            if lastName1.countNumberOfOccurrencesOfCharacter(char: character) != lastName2.countNumberOfOccurrencesOfCharacter(char: character) {
-                return lastName1.countNumberOfOccurrencesOfCharacter(char: character) > lastName2.countNumberOfOccurrencesOfCharacter(char: character)
-                // If two or more strings contain the same amount for the character, sort these according to their length.
-            } else if lastName1.count != lastName2.count {
-                return lastName1.count > lastName2.count
-                // If two or more strings contain the same amount for the character and have the same length, sort these in alphabetical order.
-            } else {
-                return lastName1 < lastName2
-            }
-        })
-        return sortedArr
-    }
-}
-
-class MembersController: UICollectionViewController, DetailControllerDelegate {
-    
-    func handleCreatedMember() {
-        members = CoreDataManager.shared.fetchMembers()
-        self.collectionView.reloadData()
-    }
-    
-    func handleDeletedMember(member: MemberCDModel) {
-        let index = members.firstIndex(of: member)
-        guard let item = index else { return }
-        let indexPath = IndexPath(item: item, section: 0)
-        members.remove(at: item)
-        self.collectionView.deleteItems(at: [indexPath])
-    }
-    
-    func sortMembers() {
-        // When the Sort button is tapped, please call this function for the last names of the members, for the character “a” and update the UI with respect to the sorted list.
-        members = Sort.members(members: members, character: "a")
-        self.collectionView.reloadData()
-    }
+class MembersController: UICollectionViewController {
     
     var mainController: UIViewController?
     
@@ -110,4 +70,48 @@ class MembersController: UICollectionViewController, DetailControllerDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
+}
+
+// MARK: - CRUD Operation
+extension MembersController: DetailControllerDelegate {
+    func handleCreatedMember() {
+        members = CoreDataManager.shared.fetchMembers()
+        self.collectionView.reloadData()
+    }
+    
+    func handleDeletedMember(member: MemberCDModel) {
+        let index = members.firstIndex(of: member)
+        guard let item = index else { return }
+        let indexPath = IndexPath(item: item, section: 0)
+        members.remove(at: item)
+        self.collectionView.deleteItems(at: [indexPath])
+    }
+}
+
+// MARK: - Sort Operation
+extension MembersController {
+    func sortMembers() {
+        // When the Sort button is tapped, please call this function for the last names of the members, for the character “a” and update the UI with respect to the sorted list.
+        members = sort(members: members, character: "a")
+        self.collectionView.reloadData()
+    }
+    
+    fileprivate func sort(members: [MemberCDModel], character: String) -> [MemberCDModel] {
+        var sortedArr = members
+        sortedArr.sort(by: {
+            let lastName1 = $0.name?.findLastName() ?? ""
+            let lastName2 = $1.name?.findLastName() ?? ""
+            // By using the extension function you wrote, find the most occurences of the character for each string in the array and sort in descending order.
+            if lastName1.countNumberOfOccurrencesOfCharacter(char: character) != lastName2.countNumberOfOccurrencesOfCharacter(char: character) {
+                return lastName1.countNumberOfOccurrencesOfCharacter(char: character) > lastName2.countNumberOfOccurrencesOfCharacter(char: character)
+                // If two or more strings contain the same amount for the character, sort these according to their length.
+            } else if lastName1.count != lastName2.count {
+                return lastName1.count > lastName2.count
+                // If two or more strings contain the same amount for the character and have the same length, sort these in alphabetical order.
+            } else {
+                return lastName1 < lastName2
+            }
+        })
+        return sortedArr
+    }
 }
