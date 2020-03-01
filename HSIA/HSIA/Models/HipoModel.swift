@@ -7,28 +7,19 @@
 //
 
 import Foundation
-import DifferenceKit
 
-struct HipoModel: Codable {
+struct HipoModel: Decodable {
     let company, team: String
     let members: [MemberModel]
 }
 
-struct MemberModel: Codable, Differentiable {
+struct MemberModel: Decodable {
     let name, location, github: String
     let age: Int
     let hipo: InnerHipoModel
-    
-    var differenceIdentifier: String {
-        return github
-    }
-
-    func isContentEqual(to source: MemberModel) -> Bool {
-        return name == source.name
-    }
 }
 
-struct InnerHipoModel: Codable {
+struct InnerHipoModel: Decodable {
     let position: String
     let yearsInHipo: Int
 

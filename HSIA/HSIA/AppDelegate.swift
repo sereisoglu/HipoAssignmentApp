@@ -21,8 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         window?.rootViewController = UINavigationController(rootViewController: MainController())
-//        window?.rootViewController = UINavigationController(rootViewController: DetailController())
         
         return true
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        CoreDataManager.shared.saveContext()
     }
 }
