@@ -8,42 +8,75 @@
 
 import UIKit
 
-class MembersController: UICollectionViewController {
+class MembersController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var mainController: UIViewController?
     
-    fileprivate var members: [MemberCDModel]!
+    fileprivate var allMembers = [[MemberCDModel]]()
     
     fileprivate let headerId = "headerId"
     fileprivate let cellId = "cellId"
+    fileprivate let footerId = "footerId"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.members = CoreDataManager.shared.fetchMembers()
         
         self.collectionView.backgroundColor = HSIAColor.backgroundPrimary.color
         
         self.collectionView.register(MembersHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
         self.collectionView.register(MembersCell.self, forCellWithReuseIdentifier: cellId)
+        self.collectionView.register(MembersFooter.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: footerId)
         
-        self.collectionView.contentInset = .init(top: 16, left: 0, bottom: Sizing.twoButtonsCollectionViewBottomInset, right: 0)
+        self.collectionView.contentInset = .init(top: Sizing.space16pt, left: 0, bottom: Sizing.twoButtonsCollectionViewBottomInset, right: 0)
         self.collectionView.alwaysBounceVertical = true
+        
+        fetchMembers()
+    }
+    
+    fileprivate func fetchMembers() {
+        let members = CoreDataManager.shared.fetchMembers()
+        
+        allMembers = [
+            members.filter { $0.team?.id == Teams.iOS.id },
+            members.filter { $0.team?.id == Teams.hardware.id },
+            members.filter { $0.team?.id == Teams.android.id },
+            members.filter { $0.team?.id == Teams.qaAutomation.id },
+            members.filter { $0.team?.id == Teams.webFrontend.id },
+            members.filter { $0.team?.id == Teams.backend.id },
+        ]
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! MembersHeader
-        header.setData(headerText: "iOS Team")
-        return header
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! MembersHeader
+            header.setData(headerText: Teams.allCasesNameArr[indexPath.section])
+            return header
+        case UICollectionView.elementKindSectionFooter:
+            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: footerId, for: indexPath)
+            return footer
+        default:
+            assert(false, "Unexpected element kind.")
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return allMembers[section].count == 0 ? Sizing.tableViewRowHeaderAndFooterSize : .zero
+    }
+    
+    // Cell
+    
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return allMembers.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return members.count
+        return allMembers[section].count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MembersCell
-        let member = members[indexPath.row]
+        let member = allMembers[indexPath.section][indexPath.item]
         if let name = member.name, let github = member.github, let position = member.hipo?.position {
             cell.setData(imageData: member.imageData, text: name, subText: "@\(github)\n\(position)")
         }
@@ -51,7 +84,7 @@ class MembersController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let member = members[indexPath.row]
+        let member = allMembers[indexPath.section][indexPath.item]
         let detailController = DetailController(member: member)
         detailController.delegate = self
         mainController?.navigationController?.pushViewController(detailController, animated: true)
@@ -59,10 +92,10 @@ class MembersController: UICollectionViewController {
     
     init() {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = .init(width: Sizing.oneColumn, height: 84)
+        layout.itemSize = Sizing.tableViewRowLargeSize
+        layout.minimumLineSpacing = Sizing.space12pt
         layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 12
-        layout.headerReferenceSize = .init(width: Sizing.deviceSize.width, height: 42)
+        layout.headerReferenceSize = Sizing.tableViewRowHeaderAndFooterSize
         super.init(collectionViewLayout: layout)
     }
     
@@ -74,16 +107,30 @@ class MembersController: UICollectionViewController {
 
 // MARK: - CRUD Operation
 extension MembersController: DetailControllerDelegate {
-    func handleCreatedMember() {
-        members = CoreDataManager.shared.fetchMembers()
+    
+    func handleCreatedMember(member: MemberCDModel) {
+        let teamNames = Teams.allCasesNameArr
+        guard let teamName = member.team?.name else { return }
+        guard let sectionIndex = teamNames.firstIndex(of: teamName) else { return }
+        let itemIndex = allMembers[sectionIndex].count
+        let indexPath = IndexPath(item: itemIndex, section: sectionIndex)
+        allMembers[sectionIndex].insert(member, at: itemIndex)
+        self.collectionView.insertItems(at: [indexPath])
+    }
+    
+    func handlleUpdatedMember(member: MemberCDModel) {
+        fetchMembers()
         self.collectionView.reloadData()
     }
     
     func handleDeletedMember(member: MemberCDModel) {
-        let index = members.firstIndex(of: member)
-        guard let item = index else { return }
-        let indexPath = IndexPath(item: item, section: 0)
-        members.remove(at: item)
+        let teamNames = Teams.allCasesNameArr
+        guard let teamName = member.team?.name else { return }
+        guard let sectionIndex = teamNames.firstIndex(of: teamName) else { return }
+        guard let itemIndex = allMembers[sectionIndex].firstIndex(of: member) else { return }
+        let indexPath = IndexPath(item: itemIndex, section: sectionIndex)
+        CoreDataManager.shared.deleteMember(member: member)
+        allMembers[sectionIndex].remove(at: itemIndex)
         self.collectionView.deleteItems(at: [indexPath])
     }
 }
@@ -92,7 +139,9 @@ extension MembersController: DetailControllerDelegate {
 extension MembersController {
     func sortMembers() {
         // When the Sort button is tapped, please call this function for the last names of the members, for the character “a” and update the UI with respect to the sorted list.
-        members = sort(members: members, character: "a")
+        allMembers.enumerated().forEach { (index, item) in
+            allMembers[index] = sort(members: item, character: "a")
+        }
         self.collectionView.reloadData()
     }
     

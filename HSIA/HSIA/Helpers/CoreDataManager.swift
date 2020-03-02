@@ -9,57 +9,6 @@
 import UIKit
 import CoreData
 
-enum Teams: CaseIterable {
-    case iOS
-    case hardware
-    case android
-    case qaAutomation
-    case webFrontend
-    case backend
-    
-    var id: Int {
-        switch self {
-        case .iOS:
-            return 1
-        case .hardware:
-            return 2
-        case .android:
-            return 3
-        case .qaAutomation:
-            return 4
-        case .webFrontend:
-            return 5
-        case .backend:
-            return 6
-        }
-    }
-    
-    var name: String {
-        switch self {
-        case .iOS:
-            return "iOS Team"
-        case .hardware:
-            return "Hardware Team"
-        case .android:
-            return "Android Team"
-        case .qaAutomation:
-            return "QA Automation Team"
-        case .webFrontend:
-            return "Web Frontend Team"
-        case .backend:
-            return "Backend Team"
-        }
-    }
-    
-    static var allCasesNameArr: [String] {
-        var arr = [String]()
-        self.allCases.forEach {
-            arr.append($0.name)
-        }
-        return arr
-    }
-}
-
 struct CoreDataManager {
     
     static let shared = CoreDataManager()
@@ -92,32 +41,32 @@ struct CoreDataManager {
     // MARK: - CRUD
     
     // Create
-    func createMember(image: UIImage?, teamId: Int, name: String, github: String, age: Int, location: String, position: String, yearsInHipo: Int) {
+    func createMember(image: UIImage?, teamId: Int16, name: String, github: String, age: Int16, location: String, position: String, yearsInHipo: Int16) -> MemberCDModel {
         let member = MemberCDModel(context: context)
         
         if let image = image {
-            let imageData = image.jpegData(compressionQuality: 0.5)
-            member.imageData = imageData
+            member.imageData = image.jpegData(compressionQuality: 0.5)
         }
         member.team = fetchTeam(id: teamId)
         member.name = name
         member.github = github
-        member.age = Int16(age)
+        member.age = age
         member.location = location
         
         let hipo = HipoCDModel(context: context)
         hipo.position = position
-        hipo.yearsInHipo = Int16(yearsInHipo)
+        hipo.yearsInHipo = yearsInHipo
         
         member.hipo = hipo
         
         saveContext()
+        
+        return member
     }
     
     // Read
     func fetchMembers() -> [MemberCDModel] {
         let fetchRequest: NSFetchRequest<MemberCDModel> = MemberCDModel.fetchRequest()
-        
         do {
             let members = try context.fetch(fetchRequest)
             return members
@@ -127,11 +76,10 @@ struct CoreDataManager {
         }
     }
     
-    func fetchTeam(id: Int)  -> TeamCDModel? {
+    func fetchTeam(id: Int16)  -> TeamCDModel? {
         let fetchRequest: NSFetchRequest<TeamCDModel> = TeamCDModel.fetchRequest()
         fetchRequest.fetchLimit = 1
         fetchRequest.predicate = NSPredicate(format: "id = %@", "\(id)")
-        
         do {
             let teams = try context.fetch(fetchRequest)
             return teams.first
@@ -143,7 +91,6 @@ struct CoreDataManager {
     
     func fetchTeams() -> [TeamCDModel] {
         let fetchRequest: NSFetchRequest<TeamCDModel> = TeamCDModel.fetchRequest()
-        
         do {
             let teams = try context.fetch(fetchRequest)
             return teams
@@ -154,8 +101,19 @@ struct CoreDataManager {
     }
     
     // Update
-    func updateMember() {
+    func updateMember(member: MemberCDModel, image: UIImage?, teamId: Int16, name: String, github: String, age: Int16, location: String, position: String, yearsInHipo: Int16) {
+        if let image = image {
+            member.imageData = image.jpegData(compressionQuality: 0.5)
+        }
+        member.team = fetchTeam(id: teamId)
+        member.name = name
+        member.github = github
+        member.age = age
+        member.location = location
+        member.hipo?.position = position
+        member.hipo?.yearsInHipo = yearsInHipo
         
+        saveContext()
     }
     
     // Delete
@@ -202,11 +160,12 @@ struct CoreDataManager {
                     }
                     
                     if let members = res?.members {
+                        // Added members in JSON file
                         members.forEach {
-                            self.createMember(image: nil, teamId: Teams.iOS.id, name: $0.name, github: $0.github, age: $0.age, location: $0.location, position: $0.hipo.position, yearsInHipo: $0.hipo.yearsInHipo)
+                            _ = self.createMember(image: nil, teamId: Teams.iOS.id, name: $0.name, github: $0.github, age: Int16($0.age), location: $0.location, position: $0.hipo.position, yearsInHipo: Int16($0.hipo.yearsInHipo))
                         }
                         // I added myself.
-                        self.createMember(image: nil, teamId: Teams.iOS.id, name: "Saffet Emin Reisoğlu", github: "sereisoglu", age: 21, location: "Sakarya", position: "Stajyer", yearsInHipo: 0)
+                        _ = self.createMember(image: nil, teamId: Teams.iOS.id, name: "Saffet Emin Reisoğlu", github: "sereisoglu", age: 21, location: "Sakarya", position: "Stajyer", yearsInHipo: 0)
                     }
                 }
             } catch {

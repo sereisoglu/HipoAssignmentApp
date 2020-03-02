@@ -20,15 +20,6 @@ class MainController: UIViewController {
         
         setupMembersController()
         setupButtonsLayer()
-        
-        let iOSTeam = CoreDataManager.shared.fetchTeam(id: 1)
-        if let members = iOSTeam?.members?.allObjects as? [MemberCDModel] {
-            print("---------------------------------------------------------")
-            members.forEach {
-                print($0.name)
-            }
-            print("---------------------------------------------------------")
-        }
     }
     
     fileprivate func setupMembersController() {
@@ -53,20 +44,19 @@ class MainController: UIViewController {
         ])
         
         let sortMembersButton = HSIAButtonRectangle(text: "sort members", type: .primary)
-        sortMembersButton.tag = 1
         let addNewMemberButton = HSIAButtonRectangle(text: "add new member", type: .secondary)
-        addNewMemberButton.tag = 2
         
-        [sortMembersButton, addNewMemberButton].forEach {
-            $0.addTarget(self, action: #selector(handleButtons(_:)), for: .primaryActionTriggered)
+        [sortMembersButton, addNewMemberButton].enumerated().forEach { (index, item) in
+            item.tag = index + 1
+            item.addTarget(self, action: #selector(handleButtons(_:)), for: .primaryActionTriggered)
         }
         
         buttonsLayer.hstack(
             buttonsLayer.stack(
                 sortMembersButton,
-                addNewMemberButton, spacing: 16
+                addNewMemberButton, spacing: Sizing.space16pt
             ), alignment: .top
-        ).withMargins(.init(top: 16, left: 45, bottom: 0, right: 45))
+        ).withMargins(.init(top: Sizing.space16pt, left: Sizing.space45pt, bottom: 0, right: Sizing.space45pt))
     }
     
     @objc fileprivate func handleButtons(_ button: UIButton) {

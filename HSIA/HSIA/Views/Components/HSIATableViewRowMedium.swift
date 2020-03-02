@@ -19,24 +19,24 @@ class HSIATableViewRowMedium: UIView {
     init() {
         super.init(frame: .zero)
         
-        leftIcon = HSIAIcon(size: .pt22, icon: nil, tintColor: .labelPrimary)
+        leftIcon = HSIAIcon(size: .pt22, iconName: nil, tintColor: .labelPrimary)
         label = HSIALabel(text: nil, type: .body1, weight: .medium, color: .labelPrimary)
-        rightIcon = HSIAIcon(size: .pt22, icon: .chevronRight, tintColor: .labelPrimary)
+        rightIcon = HSIAIcon(size: .pt22, iconName: .chevronRight, tintColor: .labelPrimary)
         background = HSIALayerTableViewAndTextField()
         
-        let labelWidth = Sizing.oneColumn - (Sizing.paddingTableViewAndTextField.left + 22 + 10 + 10 + 22 + Sizing.paddingTableViewAndTextField.right)
+        let labelWidth = Sizing.oneColumn - (Sizing.paddingTableViewAndTextField.left + Sizing.icon22pt + Sizing.space10pt + Sizing.space10pt + Sizing.icon22pt + Sizing.paddingTableViewAndTextField.right)
         
         background.addFillSuperview(superview: self)
         
         hstack(
             leftIcon,
             label.withWidth(labelWidth),
-            rightIcon, spacing: 10
+            rightIcon, spacing: Sizing.space10pt
         ).withMargins(Sizing.paddingTableViewAndTextField)
     }
     
-    func setData(leftIconName: HSIAIconName? = nil, text: String? = nil) {
-        leftIcon.setData(icon: leftIconName)
+    func setData(leftIconName: IconName? = nil, text: String? = nil) {
+        leftIcon.setData(iconName: leftIconName)
         label.setData(text: text)
     }
     

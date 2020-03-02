@@ -10,6 +10,7 @@ import UIKit
 import LBTATools
 
 class HSIALayerButtons: UIView {
+    
     fileprivate var blurEffectView: UIVisualEffectView!
     
     init() {

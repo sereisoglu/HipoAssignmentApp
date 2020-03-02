@@ -33,14 +33,15 @@ class HSIAButtonRectangle: UIButton {
     init(text: String, type: Type) {
         super.init(frame: CGRect.zero)
         
-        self.layer.cornerRadius = 50 / 2
+        self.layer.cornerRadius = Sizing.buttonRectangleHeight / 2
         self.clipsToBounds = true
+        
         self.backgroundColor = type.backgroundColor
         
         label = HSIALabel(text: text.uppercased(), type: .body2, weight: .medium, color: .labelWhite, alignment: .center)
         label.isUserInteractionEnabled = false
         
-        self.withHeight(50)
+        self.withHeight(Sizing.buttonRectangleHeight)
         label.addCenterInSuperview(superview: self)
     }
     

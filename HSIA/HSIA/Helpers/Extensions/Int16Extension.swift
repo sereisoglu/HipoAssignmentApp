@@ -1,5 +1,5 @@
 //
-//  IntExtension.swift
+//  Int16Extension.swift
 //  HSIA
 //
 //  Created by Saffet Emin Reisoğlu on 29.02.2020.

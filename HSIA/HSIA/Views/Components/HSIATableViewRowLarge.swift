@@ -23,10 +23,10 @@ class HSIATableViewRowLarge: UIView {
         imageView = HSIAImageView(size: .pt42)
         label = HSIALabel(text: nil, type: .body1, weight: .medium, color: .labelPrimary)
         sublabel = HSIALabel(text: nil, type: .body2, weight: .medium, color: .labelSecondary, numberOfLines: 2)
-        icon = HSIAIcon(size: .pt22, icon: .chevronRight, tintColor: .labelPrimary)
+        icon = HSIAIcon(size: .pt22, iconName: .chevronRight, tintColor: .labelPrimary)
         background = HSIALayerTableViewAndTextField()
         
-        let labelWidth = Sizing.oneColumn - (Sizing.paddingTableViewAndTextField.left + 42 + 10 + 10 + 22 + Sizing.paddingTableViewAndTextField.right)
+        let labelWidth = Sizing.oneColumn - (Sizing.paddingTableViewAndTextField.left + Sizing.imageView42ptSize.width + Sizing.space10pt + Sizing.space10pt + Sizing.icon22pt + Sizing.paddingTableViewAndTextField.right)
         
         background.addFillSuperview(superview: self)
         
@@ -41,8 +41,8 @@ class HSIATableViewRowLarge: UIView {
                 ).withWidth(labelWidth),
                 hstack(
                     icon, alignment: .center
-                ), spacing: 10
-            ), spacing: 10
+                ), spacing: Sizing.space10pt
+            ), spacing: Sizing.space10pt
         ).withMargins(Sizing.paddingTableViewAndTextField)
     }
     

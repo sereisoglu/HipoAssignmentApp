@@ -9,7 +9,7 @@
 import UIKit
 import LBTATools
 
-enum HSIAIconName: String {
+enum IconName: String {
     case calendar
     case camera
     case chevronRight
@@ -24,24 +24,30 @@ enum HSIAIconName: String {
 class HSIAIcon: UIImageView {
     
     enum Size: CGFloat {
-        case pt22 = 22
-        case pt30 = 30
+        case pt22
+        case pt30
+        
+        var value: CGFloat {
+            switch self {
+            case .pt22:
+                return Sizing.icon22pt
+            case .pt30:
+                return Sizing.icon30pt
+            }
+        }
     }
     
-    init(size: Size, icon: HSIAIconName?, tintColor: HSIAColor?) {
+    init(size: Size, iconName: IconName?, tintColor: HSIAColor) {
         super.init(frame: .zero)
         
-        self.withSize(.equalEdge(size.rawValue))
-        
-        setData(icon: icon, color: tintColor)
+        self.withSize(.equalEdge(size.value))
+        setData(iconName: iconName)
+        self.tintColor = tintColor.color
     }
     
-    func setData(icon: HSIAIconName? = nil, color: HSIAColor? = nil) {
-        if let icon = icon {
-            self.image = UIImage(named: icon.rawValue)?.withRenderingMode(.alwaysTemplate)
-        }
-        if let color = color {
-            self.tintColor = color.color
+    func setData(iconName: IconName?) {
+        if let iconName = iconName {
+            self.image = UIImage(named: iconName.rawValue)?.withRenderingMode(.alwaysTemplate)
         }
     }
     

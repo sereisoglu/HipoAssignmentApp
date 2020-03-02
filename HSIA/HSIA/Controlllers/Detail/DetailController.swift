@@ -9,8 +9,9 @@
 import UIKit
 
 protocol DetailControllerDelegate {
+    func handleCreatedMember(member: MemberCDModel)
+    func handlleUpdatedMember(member: MemberCDModel)
     func handleDeletedMember(member: MemberCDModel)
-    func handleCreatedMember()
 }
 
 class DetailController: UIViewController {
@@ -61,20 +62,19 @@ class DetailController: UIViewController {
             buttonsLayer.heightAnchor.constraint(equalToConstant: Sizing.twoButtonsLayerHeight).isActive = true
             
             let deleteButton = HSIAButtonRectangle(text: "delete", type: .tertiary)
-            deleteButton.tag = 1
             let saveButton = HSIAButtonRectangle(text: "save", type: .secondary)
-            saveButton.tag = 2
             
-            [deleteButton, saveButton].forEach {
-                $0.addTarget(self, action: #selector(handleButtons(_:)), for: .primaryActionTriggered)
+            [deleteButton, saveButton].enumerated().forEach { (index, item) in
+                item.tag = index + 1
+                item.addTarget(self, action: #selector(handleButtons(_:)), for: .primaryActionTriggered)
             }
             
             buttonsLayer.hstack(
                 buttonsLayer.stack(
                     deleteButton,
-                    saveButton, spacing: 16
+                    saveButton, spacing: Sizing.space16pt
                 ), alignment: .top
-            ).withMargins(.init(top: 16, left: 45, bottom: 0, right: 45))
+            ).withMargins(.init(top: Sizing.space16pt, left: Sizing.space45pt, bottom: 0, right: Sizing.space45pt))
         } else {
             buttonsLayer.heightAnchor.constraint(equalToConstant: Sizing.oneButtonLayerHeight).isActive = true
             
@@ -85,7 +85,7 @@ class DetailController: UIViewController {
             
             buttonsLayer.hstack(
                 createButton, alignment: .top
-            ).withMargins(.init(top: 16, left: 45, bottom: 0, right: 45))
+            ).withMargins(.init(top: Sizing.space16pt, left: Sizing.space45pt, bottom: 0, right: Sizing.space45pt))
         }
     }
     
@@ -93,18 +93,24 @@ class DetailController: UIViewController {
         switch button.tag {
         case 1:
             if let member = member {
-                CoreDataManager.shared.deleteMember(member: member)
                 delegate?.handleDeletedMember(member: member)
+                self.navigationController?.popViewController(animated: true)
             }
         case 2:
-            print("Save")
+            let member = memberDetailController.updateMember()
+            if let member = member {
+                delegate?.handlleUpdatedMember(member: member)
+                self.navigationController?.popViewController(animated: true)
+            }
         case 3:
-            memberDetailController.createMember()
-            delegate?.handleCreatedMember()
+            let member = memberDetailController.createMember()
+            if let member = member {
+                delegate?.handleCreatedMember(member: member)
+                self.navigationController?.popViewController(animated: true)
+            }
         default:
             return
         }
-        self.navigationController?.popViewController(animated: true)
     }
     
 }

@@ -17,20 +17,20 @@ class HSIATextField: UIView, UITextFieldDelegate {
     fileprivate var textField: CustomTextField!
     fileprivate var background: HSIALayerTableViewAndTextField!
     
-    init(iconName: HSIAIconName, placeholder: String, keyboardType: UIKeyboardType = .default) {
+    init(iconName: IconName, placeholder: String, keyboardType: UIKeyboardType = .default) {
         super.init(frame: .zero)
         
         // Left View
         
         let leftView = UIView()
         
-        icon = HSIAIcon(size: .pt22, icon: iconName, tintColor: .labelPrimary)
+        icon = HSIAIcon(size: .pt22, iconName: iconName, tintColor: .labelPrimary)
         
         leftView.stack(
             icon, alignment: .trailing
         )
         // for ios11
-        leftView.withSize(.init(width: Sizing.paddingTableViewAndTextField.left + 22, height: 22))
+        leftView.withSize(.init(width: Sizing.paddingTableViewAndTextField.left + Sizing.icon22pt, height: Sizing.icon22pt))
         
         // Text Field
         
@@ -57,7 +57,9 @@ class HSIATextField: UIView, UITextFieldDelegate {
         if isJustNumber {
             let allowedCharacters = CharacterSet.decimalDigits
             let characterSet = CharacterSet(charactersIn: string)
-            return allowedCharacters.isSuperset(of: characterSet)
+            let length = (textField.text?.count ?? 0) + string.count - range.length
+            // Maximum 3 characters and only decimal characters
+            return allowedCharacters.isSuperset(of: characterSet) && length < 4
         } else {
             return true
         }

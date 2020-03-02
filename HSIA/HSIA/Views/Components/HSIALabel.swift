@@ -10,12 +10,13 @@ import UIKit
 
 class HSIALabel: UILabel {
     
+    fileprivate var attrs: [NSAttributedString.Key : Any]!
+    
     override var text: String? {
         didSet {
             setData(text: text)
         }
     }
-    fileprivate var attrs: [NSAttributedString.Key : Any]!
     
     init(text: String?, type: HSIAFontType, weight: HSIAFontWeight, color: HSIAColor?, alignment: NSTextAlignment = .left, numberOfLines: Int = 1) {
         super.init(frame: .zero)

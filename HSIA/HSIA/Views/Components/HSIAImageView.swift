@@ -18,9 +18,9 @@ class HSIAImageView: UIView {
         var value: CGSize {
             switch self {
                 case .pt42:
-                    return .equalEdge(42)
+                    return Sizing.imageView42ptSize
                 case .pt100:
-                    return .equalEdge(100)
+                    return Sizing.imageView100ptSize
             }
         }
     }

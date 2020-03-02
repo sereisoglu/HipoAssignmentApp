@@ -10,8 +10,6 @@ import UIKit
 
 class HSIALayerTableViewAndTextField: UIView {
     
-    fileprivate var cornerRadius: CGFloat = 8.0
-    
     fileprivate var shadowLayer: CAShapeLayer!
      
     override func layoutSubviews() {
@@ -24,7 +22,7 @@ class HSIALayerTableViewAndTextField: UIView {
             shadowLayer.fillColor = HSIAColor.groupedBackground.color.cgColor
             
             // Shadow
-            shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).cgPath
+            shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: Sizing.cornerRadius).cgPath
             shadowLayer.shadowColor = HSIAColor.shadow.color.cgColor
             shadowLayer.shadowPath = shadowLayer.path
             shadowLayer.shadowOffset = CGSize(width: 0.0, height: 2.0)
@@ -41,7 +39,7 @@ class HSIALayerTableViewAndTextField: UIView {
         // Border
         self.layer.borderWidth = 1
         self.layer.borderColor = HSIAColor.border.color.cgColor
-        self.layer.cornerRadius = cornerRadius
+        self.layer.cornerRadius = Sizing.cornerRadius
     }
     
     required init?(coder: NSCoder) {
