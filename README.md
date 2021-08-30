@@ -1,6 +1,6 @@
 <img src="images/devices.png" width="100%" />
 
-# HSIA
+# Hipo Assignment App (Internship)
 
 > This project was made within "Hipo Summer Internship Application".
 
@@ -122,10 +122,6 @@ fileprivate func sort(members: [MemberCDModel], character: String) -> [MemberCDM
 ## Architecture
 
 MVC architecture was used in this project.
-
-## Auto Layout
-
-NSLayoutConstraint and LBTATools are used for AutoLayout.
 
 ## Compatibility
 
